@@ -39,9 +39,9 @@ class EMACrossStrategy(BaseStrategy):
         
         pos_amt = current_position.get('positionAmt', 0.0)
         
-        # 判斷金叉與死叉
-        gold_cross = (prev_row[s_col] < prev_row[l_col]) and (last_row[s_col] > last_row[l_col])
-        dead_cross = (prev_row[s_col] > prev_row[l_col]) and (last_row[s_col] < last_row[l_col])
+        # 判斷金叉與死叉 (為了避免連續觸發，必須是「剛發生」的交叉)
+        gold_cross = (prev_row[s_col] <= prev_row[l_col]) and (last_row[s_col] > last_row[l_col])
+        dead_cross = (prev_row[s_col] >= prev_row[l_col]) and (last_row[s_col] < last_row[l_col])
         
         # --- 交易邏輯 ---
         if pos_amt == 0:

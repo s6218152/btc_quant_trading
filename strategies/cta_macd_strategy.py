@@ -35,33 +35,29 @@ class MACDTrendStrategy(BaseStrategy):
             return 'hold'
             
         # 取得最新已完成的 K 線 (通常是倒數第二根，最後一根可能還在變動)
-        # 為了即時性，如果確認使用 WebSocket 可以在此微調，這裡先用最後一根的當下狀態
         last_row = df.iloc[-1]
         prev_row = df.iloc[-2]
         
         pos_amt = current_position.get('positionAmt', 0.0)
         
-        # 判斷金叉與死叉
-        gold_cross = (prev_row['macd_line'] < prev_row['macd_signal']) and (last_row['macd_line'] > last_row['macd_signal'])
-        dead_cross = (prev_row['macd_line'] > prev_row['macd_signal']) and (last_row['macd_line'] < last_row['macd_signal'])
+        # 判斷金叉與死叉 (為了避免連續觸發，必須是「剛發生」的交叉)
+        gold_cross = (prev_row['macd_line'] <= prev_row['macd_signal']) and (last_row['macd_line'] > last_row['macd_signal'])
+        dead_cross = (prev_row['macd_line'] >= prev_row['macd_signal']) and (last_row['macd_line'] < last_row['macd_signal'])
         
         # --- 交易邏輯 ---
         
         if pos_amt == 0:
-            # 空手狀態下尋找進場點
             if gold_cross and last_row['macd_hist'] > 0:
-                return 'buy' # 做多
+                return 'buy'
             elif dead_cross and last_row['macd_hist'] < 0:
-                return 'sell' # 做空
+                return 'sell'
                 
         elif pos_amt > 0:
-            # 持有多單時尋找平倉或反向點
             if dead_cross:
-                return 'sell' # 平多轉空，或單純平倉 (取決於主程式邏輯，這裡是發出 signal)
+                return 'sell'
                 
         elif pos_amt < 0:
-            # 持有空單時尋找平倉或反向點
             if gold_cross:
-                return 'buy' # 平空轉多
+                return 'buy'
                 
         return 'hold'
