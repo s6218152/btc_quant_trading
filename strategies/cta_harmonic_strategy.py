@@ -11,10 +11,16 @@ class HarmonicPatternStrategy(BaseStrategy):
     並計算這五個點的斐波那契回撤比例，判斷是否符合 Gartley 或 Bat 等型態。
     """
     
-    def __init__(self, exchange, config_params: Dict[str, Any], order_size=5, err_tolerance=0.08):
+    def __init__(self, exchange, config_params: Dict[str, Any], order_size=21, err_tolerance=0.10):
         super().__init__(exchange, config_params)
         self.order_size = order_size # 尋找局部極值時的左右視窗大小 (越大過濾掉越小的雜訊)
-        self.err_tolerance = err_tolerance # 斐波那契比例的容錯範圍 (放寬為 8%)
+        self.err_tolerance = err_tolerance # 斐波那契比例的容錯範圍 (放寬為 10%)
+        self.last_traded_d_idx = -1 # 紀錄上一次觸發交易的 D 點索引，避免同一個型態連續進場
+        
+        # 追蹤停利相關變數
+        self.highest_since_entry = 0.0
+        self.lowest_since_entry = float('inf')
+        self.trailing_stop_pct = 0.02 # 從最高點回撤 2% 也就是破線平倉
 
     def get_extrema(self, data: pd.Series, order: int) -> Tuple[List[int], List[int]]:
         """找出序列的局部高點與低點索引"""
@@ -75,6 +81,26 @@ class HarmonicPatternStrategy(BaseStrategy):
                             return True
             return False
             
+        # 驗證 Butterfly Pattern
+        elif pattern_type == 'Butterfly':
+            # 理想比例: AB=0.786 XA, BC=0.382-0.886 AB, CD=1.618-2.24 BC, AD=1.27-1.618 XA
+            if self.is_valid_ratio(ab_xa, 0.786):
+                if 0.382 - self.err_tolerance <= bc_ab <= 0.886 + self.err_tolerance:
+                    if 1.618 - self.err_tolerance <= cd_bc <= 2.24 + self.err_tolerance:
+                        if 1.27 - self.err_tolerance <= ad_xa <= 1.618 + self.err_tolerance:
+                            return True
+            return False
+            
+        # 驗證 Crab Pattern
+        elif pattern_type == 'Crab':
+            # 理想比例: AB=0.382-0.618 XA, BC=0.382-0.886 AB, CD=2.24-3.618 BC, AD=1.618 XA
+            if 0.382 - self.err_tolerance <= ab_xa <= 0.618 + self.err_tolerance:
+                if 0.382 - self.err_tolerance <= bc_ab <= 0.886 + self.err_tolerance:
+                    if 2.24 - self.err_tolerance <= cd_bc <= 3.618 + self.err_tolerance:
+                        if self.is_valid_ratio(ad_xa, 1.618):
+                            return True
+            return False
+            
         return False
 
     def generate_signals(self, df: pd.DataFrame) -> pd.DataFrame:
@@ -90,22 +116,49 @@ class HarmonicPatternStrategy(BaseStrategy):
         pos_amt = current_position.get('positionAmt', 0.0)
         current_close = df.iloc[-1]['close']
         
-        # 1. 簡單的固定 5% 停利與 3% 停損 (為了測試和諧進場的效率，不加複雜追蹤停利)
+        # 1. 持倉狀態下，執行追蹤停利與固定停損
         if pos_amt != 0:
             entry_price = current_position.get('entryPrice', 0.0)
             if entry_price > 0:
                 if pos_amt > 0:
+                    # 做多: 更新歷史最高價
+                    if current_close > self.highest_since_entry:
+                        self.highest_since_entry = current_close
+                        
                     pnl_pct = (current_close - entry_price) / entry_price
-                    if pnl_pct >= 0.05 or pnl_pct <= -0.03:
+                    drawdown_pct = (self.highest_since_entry - current_close) / self.highest_since_entry
+                    
+                    # 條件 1: 固定 3% 停損 (防守)
+                    if pnl_pct <= -0.03:
+                        self.highest_since_entry = 0.0  # 重置
                         return 'sell'
+                        
+                    # 條件 2: 追蹤停利 (前提是至少已經賺了一點，例如賺超過 1%)
+                    if pnl_pct >= 0.01 and drawdown_pct >= self.trailing_stop_pct:
+                        self.highest_since_entry = 0.0  # 重置
+                        return 'sell'
+                        
                 else:
+                    # 做空: 更新歷史最低價
+                    if current_close < self.lowest_since_entry:
+                        self.lowest_since_entry = current_close
+                        
                     pnl_pct = (entry_price - current_close) / entry_price
-                    if pnl_pct >= 0.05 or pnl_pct <= -0.03:
+                    drawdown_pct = (current_close - self.lowest_since_entry) / self.lowest_since_entry
+                    
+                    if pnl_pct <= -0.03:
+                        self.lowest_since_entry = float('inf') # 重置
                         return 'buy'
+                        
+                    if pnl_pct >= 0.01 and drawdown_pct >= self.trailing_stop_pct:
+                        self.lowest_since_entry = float('inf') # 重置
+                        return 'buy'
+                        
             return 'hold'
 
-        # 2. 空手狀態下，偵測和諧型態
-        # 扣除最後一根跳動的 K 線，避免未來函數
+        # 空手狀態: 重置高低點記憶，並偵測新和諧型態
+        self.highest_since_entry = 0.0
+        self.lowest_since_entry = float('inf')
         closed_df = df.iloc[:-1].copy()
         
         # 使用 scipy argrelextrema 尋找峰谷值
@@ -120,29 +173,48 @@ class HarmonicPatternStrategy(BaseStrategy):
             
         extrema.sort(key=lambda x: x['idx'])
         
-        # 過濾連續同類型的點，以及過濾掉振幅太小 (小於 0.5%) 的無意義雜訊波段
+        # 嚴格過濾連續同類型的點，以及過濾掉振幅太小 (小於 0.5%) 的無意義雜訊波段
         filtered_extrema = []
         for e in extrema:
             if not filtered_extrema:
                 filtered_extrema.append(e)
+                continue
+                
+            last_e = filtered_extrema[-1]
+            if last_e['type'] == e['type']:
+                # 同類型，保留數值更極端的
+                if (e['type'] == 'high' and e['val'] > last_e['val']) or \
+                   (e['type'] == 'low' and e['val'] < last_e['val']):
+                    filtered_extrema[-1] = e
             else:
-                last_e = filtered_extrema[-1]
+                # 檢查振幅，如果跟上一個極端點的距離小於 0.5%，就視為盤整雜訊
+                val_e = float(e['val'])
+                val_last = float(last_e['val'])
+                swing_pct = abs(val_e - val_last) / val_last
+                if swing_pct >= 0.005:
+                    filtered_extrema.append(e)
+                else:
+                    # 振幅太小，代表這只是一個假突破/雜訊，我們不把它當作新反轉點。
+                    # 如果我們不加它，那目前最後一個點 (last_e) 的狀態就保持不變
+                    # 但等一下出現的如果跟 e 同向，它就會與 last_e 變成同向，在下一個迴圈受到檢查與合併。
+                    pass
+                    
+        # 第二次清理：因為上面 pass 捨棄了反轉點，可能導致「未來」加進來的點變成跟最後一點同類型
+        # 所以再跑一次合併同類型的邏輯，確保嚴格的 High-Low-High-Low 交錯
+        final_extrema = []
+        for e in filtered_extrema:
+            if not final_extrema:
+                final_extrema.append(e)
+            else:
+                last_e = final_extrema[-1]
                 if last_e['type'] == e['type']:
-                    # 同類型，保留數值更極端的
                     if (e['type'] == 'high' and e['val'] > last_e['val']) or \
                        (e['type'] == 'low' and e['val'] < last_e['val']):
-                        filtered_extrema[-1] = e
+                        final_extrema[-1] = e
                 else:
-                    # 檢查振幅，如果跟上一個極端點的距離小於 0.5%，就視為盤整雜訊，不把它當作新的反轉點
-                    # 避免微小的抖動被當成波段
-                    swing_pct = abs(e['val'] - last_e['val']) / last_e['val']
-                    if swing_pct > 0.005:
-                        filtered_extrema.append(e)
-                    else:
-                        # 如果振幅太小，代表這只是一個假突破/雜訊，我們捨棄這個點。
-                        # 但為保持結構連續，直接丟棄可能會導致高低反相，
-                        # 這裡簡化處理：如果振幅太小，直接把原本的最後一個點也 pop 掉，重新找下一個明顯的轉折
-                        filtered_extrema.pop()
+                    final_extrema.append(e)
+        
+        filtered_extrema = final_extrema
                     
         # 和諧型態需要完整的 5 個轉折點 (X, A, B, C, D)
         if len(filtered_extrema) < 5:
@@ -167,21 +239,24 @@ class HarmonicPatternStrategy(BaseStrategy):
         # 判斷這個型態大方向
         d_type = str(recent_5[-1]['type']) # type: ignore
         
-        # 牛市看漲 (Bullish Pattern): 結構長得像變形的 W 頂或 M 頂
-        # 為了簡化，只要符合斐波那契點位，且 D 點是近期的區域最低點 (Low)，就是一個強烈看漲反轉訊號 (Bullish)
+        # 避免針對同一個 D 點重複進場
+        if d_idx == self.last_traded_d_idx:
+            return 'hold'
+        
+        # 簡化簡化: 如果 D 點是低點，而且符合斐波那契點位，這是一個強烈看漲反轉訊號 (Bullish)
+        # 注意: 為了增加進場機率，我們放寬了過度嚴格的 "未噴出" 條件
         
         is_gartley = self.check_pattern(points, 'Gartley')
         is_bat = self.check_pattern(points, 'Bat')
+        is_butterfly = self.check_pattern(points, 'Butterfly')
+        is_crab = self.check_pattern(points, 'Crab')
         
-        if is_gartley or is_bat:
+        if is_gartley or is_bat or is_butterfly or is_crab:
             if d_type == 'low':
-                # Bullish: D點是區域低點，價格跌到 D 準備反轉向上 => Buy
-                # 確保現在價格還沒有離 D 點太遠 (未噴出)
-                if current_close <= points[-1] * 1.01: 
-                    return 'buy'
+                self.last_traded_d_idx = d_idx
+                return 'buy'
             elif d_type == 'high':
-                # Bearish: D點是區域高點，價格漲到 D 準備反轉向下 => Sell
-                if current_close >= points[-1] * 0.99:
-                    return 'sell'
+                self.last_traded_d_idx = d_idx
+                return 'sell'
                     
         return 'hold'

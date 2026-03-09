@@ -3,10 +3,7 @@ import pandas as pd
 from datetime import datetime
 from config import BINANCE_API_KEY, BINANCE_SECRET_KEY, IS_FUTURES, SYMBOL, TIMEFRAME, TRADE_AMOUNT_USDT
 from core.exchange import BinanceExchange
-from strategies.cta_macd_strategy import MACDTrendStrategy
-from strategies.cta_ema_strategy import EMACrossStrategy
-from strategies.cta_rsi_strategy import RSIStrategy
-from strategies.cta_bollinger_strategy import BollingerBandsStrategy
+from strategies.cta_harmonic_strategy import HarmonicPatternStrategy
 from strategies.multi_strategy import MultiStrategyCombiner
 import logging
 import ccxt
@@ -58,9 +55,10 @@ def run_backtest():
     # 1. 初始化 Exchange API
     exchange = BinanceExchange(BINANCE_API_KEY, BINANCE_SECRET_KEY, is_futures=IS_FUTURES)
     
-    # 2. 下載 2025 年的數據 (從 2025-01-01 到現在)
+    # 2. 下載 2025 年的數據 (從 2024-01-01 到現在)
     start_date = "2024-01-01T00:00:00Z"
-    end_date = datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
+    import datetime as dt
+    end_date = datetime.now(dt.UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
     
     df = fetch_historical_data(exchange, SYMBOL, TIMEFRAME, start_date, end_date)
     
@@ -74,11 +72,8 @@ def run_backtest():
         'TIMEFRAME': TIMEFRAME,
         'TRADE_AMOUNT_USDT': TRADE_AMOUNT_USDT
     }
-    macd_strategy = MACDTrendStrategy(exchange, config_params)
-    ema_strategy = EMACrossStrategy(exchange, config_params)
-    rsi_strategy = RSIStrategy(exchange, config_params)
-    bb_strategy = BollingerBandsStrategy(exchange, config_params)
-    strategy = MultiStrategyCombiner(exchange, config_params, [macd_strategy, ema_strategy, rsi_strategy, bb_strategy], mode='majority')
+    harmonic_strategy = HarmonicPatternStrategy(exchange, config_params, order_size=21, err_tolerance=0.10)
+    strategy = MultiStrategyCombiner(exchange, config_params, [harmonic_strategy], mode='all', signal_memory_bars=1)
     
     # 先一次性計算所有指標，加快回測速度
     df = strategy.generate_signals(df)
