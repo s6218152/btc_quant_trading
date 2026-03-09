@@ -104,9 +104,13 @@ class HarmonicPatternStrategy(BaseStrategy):
         return False
 
     def generate_signals(self, df: pd.DataFrame) -> pd.DataFrame:
-        # 和諧型態尋找極值的邏輯牽涉到動態的序列片段
-        # 只依靠指標欄位可能導致未來函數 (在K線還沒收盤就將其列為高點)，
-        # 所以直接讓 check_entry_exit 每次從歷史資料截斷找極點最乾淨。
+        """
+        前置計算: 在這裡計算 200 日均線作為大趨勢過濾器。
+        使用 pandas 原生 ewm 計算，避免 pandas-ta 的版本相容性問題。
+        """
+        if not df.empty and len(df) >= 200:
+            df['ema_200'] = df['close'].ewm(span=200, adjust=False).mean()
+            
         return df
         
     def check_entry_exit(self, df: pd.DataFrame, current_position: Dict[str, Any]) -> str:
@@ -242,6 +246,9 @@ class HarmonicPatternStrategy(BaseStrategy):
         # 避免針對同一個 D 點重複進場
         if d_idx == self.last_traded_d_idx:
             return 'hold'
+            
+        # 取得大趨勢 EMA-200
+        current_ema_200 = df.iloc[-1].get('ema_200', None)
         
         # 簡化簡化: 如果 D 點是低點，而且符合斐波那契點位，這是一個強烈看漲反轉訊號 (Bullish)
         # 注意: 為了增加進場機率，我們放寬了過度嚴格的 "未噴出" 條件
@@ -253,10 +260,14 @@ class HarmonicPatternStrategy(BaseStrategy):
         
         if is_gartley or is_bat or is_butterfly or is_crab:
             if d_type == 'low':
-                self.last_traded_d_idx = d_idx
-                return 'buy'
+                # Bullish: 準備做多，必須符合大趨勢 (價格大於 EMA-200)
+                if pd.notna(current_ema_200) and current_close > current_ema_200:
+                    self.last_traded_d_idx = d_idx
+                    return 'buy'
             elif d_type == 'high':
-                self.last_traded_d_idx = d_idx
-                return 'sell'
+                # Bearish: 準備做空，必須符合大趨勢 (價格小於 EMA-200)
+                if pd.notna(current_ema_200) and current_close < current_ema_200:
+                    self.last_traded_d_idx = d_idx
+                    return 'sell'
                     
         return 'hold'
