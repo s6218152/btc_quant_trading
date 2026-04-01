@@ -56,7 +56,7 @@ def run_backtest():
     exchange = BinanceExchange(BINANCE_API_KEY, BINANCE_SECRET_KEY, is_futures=IS_FUTURES)
     
     # 2. 下載 2025 年的數據 (從 2024-01-01 到現在)
-    start_date = "2024-01-01T00:00:00Z"
+    start_date = "2020-01-01T00:00:00Z"
     import datetime as dt
     end_date = datetime.now(dt.UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
     
@@ -86,7 +86,7 @@ def run_backtest():
     win_trades = 0
     loss_trades = 0
     
-    print("\n--- 開始歷史回測 (2024-01-01 ~ 至今) ---")
+    print("\n--- 開始歷史回測 (2020-01-01 ~ 至今) ---")
     
     # 從第 50 根起跑，確保均線(如 EMA 50) 指標已經產生
     for i in range(50, len(df)):

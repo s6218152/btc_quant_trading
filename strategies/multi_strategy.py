@@ -91,6 +91,9 @@ class MultiStrategyCombiner(BaseStrategy):
         self.last_agreeing_strategies = []
         
         def clean_name(n):
+            strat = next((s for s in self.strategies if s.__class__.__name__ == n), None)
+            if strat and hasattr(strat, 'last_action_reason') and strat.last_action_reason:
+                return strat.last_action_reason
             return n.replace('Strategy', '').replace('Trend', '').replace('Cross', '').replace('Bands', '')
         
         # 處理冷卻期

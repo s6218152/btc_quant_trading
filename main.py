@@ -4,10 +4,7 @@ import json
 import os
 from config import BINANCE_API_KEY, BINANCE_SECRET_KEY, IS_FUTURES, SYMBOL, TIMEFRAME, LEVERAGE, TRADE_AMOUNT_USDT, DRY_RUN
 from core.exchange import BinanceExchange
-from strategies.cta_macd_strategy import MACDTrendStrategy
-from strategies.cta_ema_strategy import EMACrossStrategy
-from strategies.cta_rsi_strategy import RSIStrategy
-from strategies.cta_bollinger_strategy import BollingerBandsStrategy
+from strategies.cta_harmonic_strategy import HarmonicPatternStrategy
 from strategies.multi_strategy import MultiStrategyCombiner
 from utils.logger import setup_logger, log_trade
 from utils.notifier import send_telegram_message, send_alert
@@ -69,14 +66,11 @@ def execute_bot():
             'TRADE_AMOUNT_USDT': TRADE_AMOUNT_USDT
         }
         
-        # 建立子策略實體
-        macd_strategy = MACDTrendStrategy(exchange, config_params)
-        ema_strategy = EMACrossStrategy(exchange, config_params)
-        rsi_strategy = RSIStrategy(exchange, config_params)
-        bb_strategy = BollingerBandsStrategy(exchange, config_params)
+        # 建立和諧型態策略實體
+        harmonic_strategy = HarmonicPatternStrategy(exchange, config_params, order_size=21, err_tolerance=0.10)
         
-        # 將所有子策略放入組合器 (設定為過半決策制)
-        strategy = MultiStrategyCombiner(exchange, config_params, [macd_strategy, ema_strategy, rsi_strategy, bb_strategy], mode='majority')
+        # 將單一策略放入組合器 (為了維持架構統一)
+        strategy = MultiStrategyCombiner(exchange, config_params, [harmonic_strategy], mode='all', signal_memory_bars=1)
         
         # 3. 獲取資料並執行策略判斷
         df = exchange.fetch_ohlcv(SYMBOL, TIMEFRAME)
@@ -193,16 +187,18 @@ def execute_bot():
         send_alert(error_msg)
 
 def main():
-    send_telegram_message(f"✅ BTC 量化機器人 (MACD + EMA + RSI + BB) [過半決策] 已啟動！\n監控: {SYMBOL} ({TIMEFRAME})")
+    send_telegram_message(f"✅ BTC 量化機器人 (和諧交易法 Gartley/Bat/Butterfly/Crab) [已升級] 已啟動！\n監控: {SYMBOL} ({TIMEFRAME})")
     logger.info("系統啟動，開始排程監聽...")
     
     # 立即執行第一次
     execute_bot()
     
-    # 設定排程器：每分鐘檢查一次 (若您的 Timeline 是 1h，其實可以每小時檢查，這裡以 1 分鐘為例演示高頻度檢測)
-    # 若要準確對齊 K 線收盤，應在每小時的 00 份執行
-    # schedule.every().hour.at(":00").do(execute_bot)
-    schedule.every(5).minutes.do(execute_bot)
+    # 設定排程器：精確對齊 15 分鐘線的收盤時間 (00, 15, 30, 45 分)
+    # 這是為了確保每根 K 線都已經完整走完，訊號才不會失真
+    schedule.every().hour.at(":00").do(execute_bot)
+    schedule.every().hour.at(":15").do(execute_bot)
+    schedule.every().hour.at(":30").do(execute_bot)
+    schedule.every().hour.at(":45").do(execute_bot)
     
     try:
         while True:

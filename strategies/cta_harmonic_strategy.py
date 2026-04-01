@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import logging
 from typing import Dict, Any, List, Tuple
 from .base_strategy import BaseStrategy
 from scipy.signal import argrelextrema
@@ -21,6 +22,7 @@ class HarmonicPatternStrategy(BaseStrategy):
         self.highest_since_entry = 0.0
         self.lowest_since_entry = float('inf')
         self.trailing_stop_pct = 0.02 # 從最高點回撤 2% 也就是破線平倉
+        self.logger = logging.getLogger("HarmonicStrategy")
 
     def get_extrema(self, data: pd.Series, order: int) -> Tuple[List[int], List[int]]:
         """找出序列的局部高點與低點索引"""
@@ -132,14 +134,23 @@ class HarmonicPatternStrategy(BaseStrategy):
                     pnl_pct = (current_close - entry_price) / entry_price
                     drawdown_pct = (self.highest_since_entry - current_close) / self.highest_since_entry
                     
+                    # 計算並紀錄價位
+                    hard_stop_price = entry_price * 0.97
+                    trailing_stop_price = self.highest_since_entry * (1 - self.trailing_stop_pct)
+                    ts_status = f"{trailing_stop_price:.2f}" if pnl_pct >= 0.01 else f"尚未啟動 (需≧{entry_price * 1.01:.2f})"
+                    self.logger.info(f"[和諧策略｜多單監控] 當前價: {current_close:.2f} | 停損點: {hard_stop_price:.2f} | 追蹤停利點: {ts_status}")
+
+                    
                     # 條件 1: 固定 3% 停損 (防守)
                     if pnl_pct <= -0.03:
                         self.highest_since_entry = 0.0  # 重置
+                        self.last_action_reason = "停損 Stop Loss (多單防守)"
                         return 'sell'
                         
                     # 條件 2: 追蹤停利 (前提是至少已經賺了一點，例如賺超過 1%)
                     if pnl_pct >= 0.01 and drawdown_pct >= self.trailing_stop_pct:
                         self.highest_since_entry = 0.0  # 重置
+                        self.last_action_reason = "追蹤停利 Trailing Stop (多單獲利)"
                         return 'sell'
                         
                 else:
@@ -150,12 +161,20 @@ class HarmonicPatternStrategy(BaseStrategy):
                     pnl_pct = (entry_price - current_close) / entry_price
                     drawdown_pct = (current_close - self.lowest_since_entry) / self.lowest_since_entry
                     
+                    # 計算並紀錄價位
+                    hard_stop_price = entry_price * 1.03
+                    trailing_stop_price = self.lowest_since_entry * (1 + self.trailing_stop_pct)
+                    ts_status = f"{trailing_stop_price:.2f}" if pnl_pct >= 0.01 else f"尚未啟動 (需≦{entry_price * 0.99:.2f})"
+                    self.logger.info(f"[和諧策略｜空單監控] 當前價: {current_close:.2f} | 停損點: {hard_stop_price:.2f} | 追蹤停利點: {ts_status}")
+                    
                     if pnl_pct <= -0.03:
                         self.lowest_since_entry = float('inf') # 重置
+                        self.last_action_reason = "停損 Stop Loss (空單防守)"
                         return 'buy'
                         
                     if pnl_pct >= 0.01 and drawdown_pct >= self.trailing_stop_pct:
                         self.lowest_since_entry = float('inf') # 重置
+                        self.last_action_reason = "追蹤停利 Trailing Stop (空單獲利)"
                         return 'buy'
                         
             return 'hold'
@@ -263,11 +282,13 @@ class HarmonicPatternStrategy(BaseStrategy):
                 # Bullish: 準備做多，必須符合大趨勢 (價格大於 EMA-200)
                 if pd.notna(current_ema_200) and current_close > current_ema_200:
                     self.last_traded_d_idx = d_idx
+                    self.last_action_reason = "Harmonic Bullish Pattern (做多)"
                     return 'buy'
             elif d_type == 'high':
                 # Bearish: 準備做空，必須符合大趨勢 (價格小於 EMA-200)
                 if pd.notna(current_ema_200) and current_close < current_ema_200:
                     self.last_traded_d_idx = d_idx
+                    self.last_action_reason = "Harmonic Bearish Pattern (做空)"
                     return 'sell'
                     
         return 'hold'
