@@ -120,10 +120,18 @@ def main() -> None:
             "stress-prepare",
             "stress-report",
             "stress-validate",
+            "dryrun-start",
+            "dryrun-stop",
+            "dryrun-status",
+            "dryrun-logs",
         ],
     )
     parser.add_argument("--result", help="Repository-relative native result JSON or ZIP")
     args = parser.parse_args()
+    if args.action.startswith("dryrun-"):
+        from dryrun import main as dryrun_main
+
+        raise SystemExit(dryrun_main(args.action))
     if args.action == "analyze" and not args.result:
         parser.error("analyze requires --result")
     config = json.loads((ROOT / CONFIG).read_text())

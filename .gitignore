@@ -30,5 +30,6 @@ user_data/data/
 user_data/backtest_results/
 user_data/logs/
 user_data/*.sqlite*
+user_data/dryrun/
 .pytest_cache/
 .ruff_cache/

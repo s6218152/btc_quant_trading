@@ -1,7 +1,7 @@
 # BTCUSDT Donchian 4H 研究
 
 以 Freqtrade 2026.9 研究 BTC/USDT:USDT 永續合約。已完成開發基準與凍結的 Walk-Forward 研究，
-**僅允許回測；設定保留 dry-run，尚未進行持續模擬驗證，禁止真實下單。**
+**僅允許回測與無交易金鑰的 dry-run，禁止真實下單。持續模擬驗證尚未完成。**
 根目錄既有 `main.py`、`backtest.py` 與 `strategies/` 是舊系統，沒有改寫或啟動。
 
 研究結果與限制見 [Phase 7–10 報告](user_data/research/study/REPORT.md)。
@@ -54,7 +54,44 @@ python3 scripts/research.py stress-report
 
 下載、回測與 lookahead 的詳細日誌保存至 `user_data/logs/`；終端只顯示摘要。
 `backtest` 會先驗證資料與交易規格，再執行原生引擎，最後核對風險與損益。
-執行器不提供 `trade` 指令；策略也會拒絕 `dry_run=false`。
+執行器不提供任意 `trade` 指令；dry-run 使用獨立安全入口，策略也會拒絕 `dry_run=false`。
+
+## 持續模擬交易
+
+先啟動 Docker Desktop，完成上面的 `build`，再執行：
+
+```sh
+python3 scripts/research.py dryrun-start
+python3 scripts/research.py dryrun-status
+python3 scripts/research.py dryrun-logs
+python3 scripts/research.py dryrun-stop
+```
+
+`dryrun-start` 在背景啟動，重複呼叫不會建立第二個服務。使用原本 V1 基準策略、
+10,000 USDT 模擬資金，最多一個 BTC 永續部位；不是根據 2025 結果重新選參。
+只連公開行情，不需提供 API key。入口拒絕交易金鑰、實盤模式、額外設定檔與
+`FREQTRADE__*` 環境覆寫，不開放 API／網頁管理連接埠。
+
+資料庫、輪替日誌與每次啟動的設定／策略雜湊位於 `user_data/dryrun/`，不提交 Git；
+停止、重啟會保留模擬部位。請勿在運行時刪除或更改這個目錄。
+要修改執行設定，先停止、備份該目錄，再移走其中 `config.json` 讓入口重新產生。
+備份資料庫時先正常停止，避免 SQLite 寫入中的不一致。
+
+初次取得 4H／日線暖機資料可能需要數分鐘；1000 根暖機 K 線需要多次 API 請求，
+引擎會提示這項效能警告。這些即時運行所需的暖機資料不寫入凍結研究資料集；
+不執行 2026 回測、績效選參或最終保留集評估。
+
+每 5 秒進行原生主迴圈，策略指標只在新 K 線更新。4H 進場訊號依已完成 K 線，
+不代表每 5 秒開倉；持倉管理仍持續運作。每 30 秒記錄心跳，180 秒內的
+`RUNNING` 心跳才算存活；`dryrun-status` 未就緒、已停止或過期時回傳非零。
+心跳不能保證交易所行情新鮮或整個策略正確，也不是外部告警系統。
+
+容器程序退出時由 Docker 自動重啟；健康檢查失敗只標示 unhealthy，**不會自行重啟**。
+手動停止後不會立刻開回；電腦睡眠、關機或 Docker 未啟動時也不會運行。
+尚未部署 N5105，亦未完成長時間斷線／重開機恢復驗證。
+
+模擬成交採 Freqtrade 的 dry-run 撮合假設；沿用研究 `fee=0.001` 成本代理，
+可能與原生模擬撮合價格影響重疊，不代表真實交易費率或可成交績效。
 
 ## 研究切分
 

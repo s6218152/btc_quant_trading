@@ -1,0 +1,26 @@
+services:
+  paper:
+    image: btc-donchian-research:2026.9
+    working_dir: /freqtrade
+    entrypoint: ["python", "scripts/dryrun.py", "run"]
+    restart: unless-stopped
+    stop_grace_period: 120s
+    environment:
+      TZ: UTC
+      PYTHONPATH: /freqtrade
+    volumes:
+      - ./user_data/dryrun:/freqtrade/user_data/dryrun
+      - ./user_data/dryrun/config.json:/freqtrade/user_data/dryrun/config.json:ro
+      - ./user_data/strategies:/freqtrade/user_data/strategies:ro
+      - ./scripts/dryrun.py:/freqtrade/scripts/dryrun.py:ro
+    healthcheck:
+      test: ["CMD", "python", "scripts/dryrun.py", "health"]
+      interval: 30s
+      timeout: 10s
+      start_period: 15m
+      retries: 3
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
