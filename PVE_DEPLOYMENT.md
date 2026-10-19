@@ -68,3 +68,14 @@ Docker 程序退出後會依 `unless-stopped` 重啟；手動停止、主機斷�
 
 官方依據：[PVE cloud-init](https://github.com/proxmox/pve-docs/blob/master/qm-cloud-init.adoc)、
 [Ubuntu 官方映像](https://cloud-images.ubuntu.com/noble/current/)。
+
+## Telegram 通知
+
+選用 `user_data/dryrun/telegram.json` 保存既有 Bot 的通知設定，檔案權限 `600`、
+擁有者 UID 1000。此檔案不包含交易所金鑰，不送入 GitHub。
+使用 Freqtrade 原生 webhook 單向呼叫 Telegram `sendMessage`，原生 Telegram
+命令接收器維持停用。只發送狀態、警告、引擎例外及模擬成交事件。
+正常關閉可通知停止；程序突然崩潰、整台主機斷電或網路中斷不保證有通知。
+更新後必須重新建立容器，讓單檔掛載取得新版程式，再確認心跳及 Telegram 通知。
+官方依據：[Freqtrade webhook](https://github.com/freqtrade/freqtrade/blob/2026.9/docs/webhook-config.md)、
+[Telegram sendMessage](https://core.telegram.org/bots/api#sendmessage)。

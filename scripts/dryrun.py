@@ -115,6 +115,12 @@ if __name__ == "__main__":
         raise SystemExit(0 if healthy(RUNTIME / "bot.log") else 1)
     if sys.argv[1:] == ["run"]:
         path = RUNTIME / "config.json"
-        validate(json.loads(path.read_text()), os.environ)
+        config = json.loads(path.read_text())
+        validate(config, os.environ)
+        if (secret := RUNTIME / "telegram.json").exists():
+            from paper_notify import run
+
+            run(config, secret)
+            raise SystemExit(0)
         os.execvp("freqtrade", ["freqtrade", "trade", "--config", str(path)])
     raise SystemExit(main(sys.argv[1]))

@@ -13,6 +13,7 @@ services:
       - ./user_data/dryrun/config.json:/freqtrade/user_data/dryrun/config.json:ro
       - ./user_data/strategies:/freqtrade/user_data/strategies:ro
       - ./scripts/dryrun.py:/freqtrade/scripts/dryrun.py:ro
+      - ./scripts/paper_notify.py:/freqtrade/scripts/paper_notify.py:ro
     healthcheck:
       test: ["CMD", "python", "scripts/dryrun.py", "health"]
       interval: 30s
