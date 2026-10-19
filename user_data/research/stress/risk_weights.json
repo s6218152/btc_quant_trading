@@ -1,0 +1,77 @@
+{
+  "identity": {
+    "parent": "e0d74b40aa212777dbe5789e667dafbb28082ab3a260d43d1953d05a939f170b",
+    "protocol": "b2f3f26666aa01e9fdbad251076f9b27076ebc02eff4fbe5a455a3d4a107a52b",
+    "strategy": "e7486557c67c7824989676f2e7293bfbce17404d9e3533a98469220d20e45892",
+    "reference": "643708df44e657f30becea956e025ef9a6651268f3153ee6778287fdba4e8f2d",
+    "diagnostic_strategy": "f4e832be6aa7312fdcacee8c45e20baab31dd4275fe96e244193096fbc8c3afb",
+    "base_config": "9462d7964b3f7f7eef511c31da3e9135804b8183bf2721282fb67fc400e9fd94",
+    "environment": "b4d4153908569861dbb3dbe909ccdef08f743b21668b9d7558f62b0cfb332d5c",
+    "data": {
+      "4h": "607c5ced62624aeea3e54940d805012702299a24c246a25a376db363b11f5635",
+      "1d": "f4f49a8265de3e85cfaee00b7c9c61da83e6c665527aa3be051ef8b50953cb91",
+      "mark": "1957ce3540661b9a4c6d4d010410cc92e7224927cb2e78515137931622677f39",
+      "funding": "2db3e526d8af383bc8ee411e99149fba198a754b9d239b84019f8824ab4c67a3",
+      "detail_1h": "cfae0742756ce2a36c3bfeebdf814f5232ee8750a7aa11c96d730665462029e5",
+      "detail_15m": "d3cb8e238d94e72970c30ea9d901206213e14b35c80fa44ca71301ba48434f36",
+      "mark_15m": "ed60d8f2b4f0f07a4d48ec26b1951f3aae3d7b8ef2d82e90ca778914b6f31746"
+    },
+    "selection": {
+      "oos_2025_h1": "baa4a1707b54f7bf9481e7d62ae86c13f72e86942b0fbc639658dc9f38e7d185",
+      "oos_2025_h2": "743e7c73c86f20ce95f4d7e9cff07ae4fe0689bef6b500f22f831a21b7526153"
+    }
+  },
+  "training": "20240101-20250101",
+  "evaluation": "20250101-20260101",
+  "target_annualized_volatility": 0.03351505691615208,
+  "unscaled_training_runs": {
+    "Donchian EMA": "cccb74ff9bd790044126",
+    "Donchian without EMA": "3fbc4f211f41728357a0",
+    "1x perpetual hold": "be076fc19c5a6c0a2823"
+  },
+  "calibration_runs": {
+    "Donchian EMA": [
+      "55dbd15788670fbe620f"
+    ],
+    "Donchian without EMA": [
+      "3372509a293432c3aa48"
+    ],
+    "1x perpetual hold": [
+      "be80be3a42a831f47347",
+      "938a47760e401d11a8e7"
+    ]
+  },
+  "weights": {
+    "Donchian EMA": {
+      "entry_period": 20,
+      "exit_period": 10,
+      "atr_multiplier": 2.5,
+      "risk_per_trade": 0.004,
+      "contract_leverage": 1.0,
+      "max_effective_leverage": 1.0,
+      "slippage_per_side": 0.0005,
+      "ema_filter": true
+    },
+    "Donchian without EMA": {
+      "entry_period": 20,
+      "exit_period": 10,
+      "atr_multiplier": 2.5,
+      "risk_per_trade": 0.0034349028312676494,
+      "contract_leverage": 1.0,
+      "max_effective_leverage": 1.0,
+      "slippage_per_side": 0.0005,
+      "ema_filter": false
+    },
+    "1x perpetual hold": {
+      "entry_period": 20,
+      "exit_period": 10,
+      "atr_multiplier": 2.5,
+      "risk_per_trade": 0.005,
+      "contract_leverage": 1.0,
+      "max_effective_leverage": 1.0,
+      "slippage_per_side": 0.0005,
+      "hold_allocation": 0.042249063337276876
+    }
+  },
+  "training_tolerance_met": true
+}

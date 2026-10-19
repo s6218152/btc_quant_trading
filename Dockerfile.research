@@ -1,0 +1,4 @@
+FROM freqtradeorg/freqtrade:2026.9@sha256:989aff5636d8f0213ed44fe334c3314a194a51c0c755d16866960247aafd2eae
+COPY requirements-research.txt /tmp/requirements-research.txt
+RUN pip install --no-cache-dir -r /tmp/requirements-research.txt
+WORKDIR /freqtrade

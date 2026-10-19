@@ -1,0 +1,239 @@
+{
+  "coarse": [
+    {
+      "entry_period": 20,
+      "exit_period": 10,
+      "atr_multiplier": 2.5,
+      "risk_per_trade": 0.005
+    },
+    {
+      "entry_period": 10,
+      "exit_period": 10,
+      "atr_multiplier": 2.5,
+      "risk_per_trade": 0.005
+    },
+    {
+      "entry_period": 30,
+      "exit_period": 10,
+      "atr_multiplier": 2.5,
+      "risk_per_trade": 0.005
+    },
+    {
+      "entry_period": 40,
+      "exit_period": 10,
+      "atr_multiplier": 2.5,
+      "risk_per_trade": 0.005
+    },
+    {
+      "entry_period": 20,
+      "exit_period": 5,
+      "atr_multiplier": 2.5,
+      "risk_per_trade": 0.005
+    },
+    {
+      "entry_period": 20,
+      "exit_period": 15,
+      "atr_multiplier": 2.5,
+      "risk_per_trade": 0.005
+    },
+    {
+      "entry_period": 20,
+      "exit_period": 20,
+      "atr_multiplier": 2.5,
+      "risk_per_trade": 0.005
+    },
+    {
+      "entry_period": 20,
+      "exit_period": 10,
+      "atr_multiplier": 2.0,
+      "risk_per_trade": 0.005
+    },
+    {
+      "entry_period": 20,
+      "exit_period": 10,
+      "atr_multiplier": 3.0,
+      "risk_per_trade": 0.005
+    },
+    {
+      "entry_period": 20,
+      "exit_period": 10,
+      "atr_multiplier": 3.5,
+      "risk_per_trade": 0.005
+    },
+    {
+      "entry_period": 20,
+      "exit_period": 10,
+      "atr_multiplier": 2.5,
+      "risk_per_trade": 0.0025
+    },
+    {
+      "entry_period": 20,
+      "exit_period": 10,
+      "atr_multiplier": 2.5,
+      "risk_per_trade": 0.0075
+    }
+  ],
+  "refined": [
+    {
+      "entry_period": 15,
+      "exit_period": 15,
+      "atr_multiplier": 2.5,
+      "risk_per_trade": 0.005
+    },
+    {
+      "entry_period": 25,
+      "exit_period": 15,
+      "atr_multiplier": 2.5,
+      "risk_per_trade": 0.005
+    },
+    {
+      "entry_period": 20,
+      "exit_period": 13,
+      "atr_multiplier": 2.5,
+      "risk_per_trade": 0.005
+    },
+    {
+      "entry_period": 20,
+      "exit_period": 17,
+      "atr_multiplier": 2.5,
+      "risk_per_trade": 0.005
+    },
+    {
+      "entry_period": 20,
+      "exit_period": 15,
+      "atr_multiplier": 2.25,
+      "risk_per_trade": 0.005
+    },
+    {
+      "entry_period": 20,
+      "exit_period": 15,
+      "atr_multiplier": 2.75,
+      "risk_per_trade": 0.005
+    }
+  ],
+  "pool": [
+    {
+      "entry_period": 20,
+      "exit_period": 10,
+      "atr_multiplier": 2.5,
+      "risk_per_trade": 0.005
+    },
+    {
+      "entry_period": 10,
+      "exit_period": 10,
+      "atr_multiplier": 2.5,
+      "risk_per_trade": 0.005
+    },
+    {
+      "entry_period": 30,
+      "exit_period": 10,
+      "atr_multiplier": 2.5,
+      "risk_per_trade": 0.005
+    },
+    {
+      "entry_period": 40,
+      "exit_period": 10,
+      "atr_multiplier": 2.5,
+      "risk_per_trade": 0.005
+    },
+    {
+      "entry_period": 20,
+      "exit_period": 5,
+      "atr_multiplier": 2.5,
+      "risk_per_trade": 0.005
+    },
+    {
+      "entry_period": 20,
+      "exit_period": 15,
+      "atr_multiplier": 2.5,
+      "risk_per_trade": 0.005
+    },
+    {
+      "entry_period": 20,
+      "exit_period": 20,
+      "atr_multiplier": 2.5,
+      "risk_per_trade": 0.005
+    },
+    {
+      "entry_period": 20,
+      "exit_period": 10,
+      "atr_multiplier": 2.0,
+      "risk_per_trade": 0.005
+    },
+    {
+      "entry_period": 20,
+      "exit_period": 10,
+      "atr_multiplier": 3.0,
+      "risk_per_trade": 0.005
+    },
+    {
+      "entry_period": 20,
+      "exit_period": 10,
+      "atr_multiplier": 3.5,
+      "risk_per_trade": 0.005
+    },
+    {
+      "entry_period": 20,
+      "exit_period": 10,
+      "atr_multiplier": 2.5,
+      "risk_per_trade": 0.0025
+    },
+    {
+      "entry_period": 20,
+      "exit_period": 10,
+      "atr_multiplier": 2.5,
+      "risk_per_trade": 0.0075
+    },
+    {
+      "entry_period": 15,
+      "exit_period": 15,
+      "atr_multiplier": 2.5,
+      "risk_per_trade": 0.005
+    },
+    {
+      "entry_period": 25,
+      "exit_period": 15,
+      "atr_multiplier": 2.5,
+      "risk_per_trade": 0.005
+    },
+    {
+      "entry_period": 20,
+      "exit_period": 13,
+      "atr_multiplier": 2.5,
+      "risk_per_trade": 0.005
+    },
+    {
+      "entry_period": 20,
+      "exit_period": 17,
+      "atr_multiplier": 2.5,
+      "risk_per_trade": 0.005
+    },
+    {
+      "entry_period": 20,
+      "exit_period": 15,
+      "atr_multiplier": 2.25,
+      "risk_per_trade": 0.005
+    },
+    {
+      "entry_period": 20,
+      "exit_period": 15,
+      "atr_multiplier": 2.75,
+      "risk_per_trade": 0.005
+    }
+  ],
+  "generated_from": "2024 development ONLY",
+  "identity": {
+    "protocol": "8e902bcf3d2963b869733810a44c40595436bce8fb9c08fa99eb1195cec2a18b",
+    "base_config": "9462d7964b3f7f7eef511c31da3e9135804b8183bf2721282fb67fc400e9fd94",
+    "strategy": "e7486557c67c7824989676f2e7293bfbce17404d9e3533a98469220d20e45892",
+    "reference": "643708df44e657f30becea956e025ef9a6651268f3153ee6778287fdba4e8f2d",
+    "environment": "b4d4153908569861dbb3dbe909ccdef08f743b21668b9d7558f62b0cfb332d5c",
+    "market_rules": "a60b2d7f100a35fcadf7c12a1d1bcfe386ab24037b48d16798c990182ca559f7",
+    "data": {
+      "4h": "607c5ced62624aeea3e54940d805012702299a24c246a25a376db363b11f5635",
+      "1d": "f4f49a8265de3e85cfaee00b7c9c61da83e6c665527aa3be051ef8b50953cb91",
+      "mark": "1957ce3540661b9a4c6d4d010410cc92e7224927cb2e78515137931622677f39",
+      "funding": "2db3e526d8af383bc8ee411e99149fba198a754b9d239b84019f8824ab4c67a3"
+    }
+  }
+}

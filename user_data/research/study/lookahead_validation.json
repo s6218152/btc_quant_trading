@@ -1,0 +1,35 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "variant": "selected",
+      "result": {
+        "filename": "Donchian4HStrategy.py",
+        "strategy": "Donchian4HStrategy",
+        "has_bias": "False",
+        "total_signals": "20",
+        "biased_entry_signals": "0",
+        "biased_exit_signals": "0",
+        "biased_indicators": ""
+      },
+      "csv": "user_data/backtest_results/study-lookahead-selected-e0d74b40aa21.csv",
+      "config_sha256": "3b08962e2a8a0d9ef265226ca030fd9f41ee54e15154269ceb9693097f5effc0",
+      "identity_sha256": "e0d74b40aa212777dbe5789e667dafbb28082ab3a260d43d1953d05a939f170b"
+    },
+    {
+      "variant": "without_ema",
+      "result": {
+        "filename": "Donchian4HStrategy.py",
+        "strategy": "Donchian4HStrategy",
+        "has_bias": "False",
+        "total_signals": "20",
+        "biased_entry_signals": "0",
+        "biased_exit_signals": "0",
+        "biased_indicators": ""
+      },
+      "csv": "user_data/backtest_results/study-lookahead-without_ema-e0d74b40aa21.csv",
+      "config_sha256": "6868c081e3fc6b1f132cb652c57465baffe124b88c9e91bc276c6193ea48382e",
+      "identity_sha256": "e0d74b40aa212777dbe5789e667dafbb28082ab3a260d43d1953d05a939f170b"
+    }
+  ]
+}

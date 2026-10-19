@@ -1,0 +1,84 @@
+{
+  "plan": {
+    "study": "Donchian4H-V1-development-baseline",
+    "freqtrade_version": "2026.9",
+    "data_start": "2021-01-01T00:00:00Z",
+    "data_end_exclusive": "2025-01-01T00:00:00Z",
+    "evaluation_start": "2024-01-01T00:00:00Z",
+    "evaluation_end_exclusive": "2025-01-01T00:00:00Z",
+    "reserved_oos": "2025 calendar year; not evaluated in Phase 2-6",
+    "reserved_final_test": "2026; not evaluated or used for parameter selection",
+    "funding_interval_hours": 8,
+    "cost_model": "5 bps taker + 5 bps slippage proxy on each fill; actual funding",
+    "maker_fee_assumption_bps": 2,
+    "baseline_order_type": "market",
+    "notes": [
+      "This is a correctness/development baseline, not a profitability claim.",
+      "The slippage proxy affects cash PnL through engine fees, not execution prices.",
+      "Funding reserve is zero for sizing; actual holding-period funding may exceed the risk budget.",
+      "Maker fees are documented but not applicable to this market-order baseline.",
+      "Walk-forward, parameter robustness and final OOS evaluation follow Phase 6."
+    ]
+  },
+  "files": {
+    "4h": {
+      "rows": 8766,
+      "start": "2021-01-01 00:00:00+00:00",
+      "end": "2024-12-31 20:00:00+00:00",
+      "expected_rows": 8766,
+      "missing": 0,
+      "duplicate_count": 0,
+      "errors": [],
+      "sha256": "e41cc19ac99673cb5015109fda8b090c1ed28595dc62f7e9a14bc52148fdd287",
+      "file": "user_data/data/binance/futures/BTC_USDT_USDT-4h-futures.feather"
+    },
+    "1d": {
+      "rows": 1461,
+      "start": "2021-01-01 00:00:00+00:00",
+      "end": "2024-12-31 00:00:00+00:00",
+      "expected_rows": 1461,
+      "missing": 0,
+      "duplicate_count": 0,
+      "errors": [],
+      "sha256": "672b434a6729c579f7ca10535de1af7ddb0bbf7dfe0232e6ae2db3d9722a5b92",
+      "file": "user_data/data/binance/futures/BTC_USDT_USDT-1d-futures.feather"
+    },
+    "mark": {
+      "rows": 35064,
+      "start": "2021-01-01 00:00:00+00:00",
+      "end": "2024-12-31 23:00:00+00:00",
+      "expected_rows": 35064,
+      "missing": 0,
+      "duplicate_count": 0,
+      "errors": [],
+      "sha256": "89958fa24f77561cdc54f1c6ca7c467e76fdb6e2b05bdb3af10c7864c2df1331",
+      "file": "user_data/data/binance/futures/BTC_USDT_USDT-1h-mark.feather"
+    },
+    "funding": {
+      "rows": 4383,
+      "start": "2021-01-01 00:00:00+00:00",
+      "end": "2024-12-31 16:00:00+00:00",
+      "expected_rows": 4383,
+      "missing": 0,
+      "duplicate_count": 0,
+      "errors": [],
+      "sha256": "ee5dcc0e9eb8912575f0f5d736ffb0d4c45e56f02f30f463cafbf0d14053881e",
+      "file": "user_data/data/binance/futures/BTC_USDT_USDT-1h-funding_rate.feather"
+    }
+  },
+  "errors": [],
+  "warnings": [
+    {
+      "issue": "Exchange daily volumes disagree with aggregated 4h volumes",
+      "dates": [
+        "2023-08-16 00:00:00+00:00",
+        "2023-11-10 00:00:00+00:00"
+      ],
+      "max_absolute_difference": 12053.294999999984,
+      "impact": "Daily EMA uses close only; entry uses 4h volume > 0; no volume sizing"
+    }
+  ],
+  "daily_4h_price_mismatched_cells": 0,
+  "daily_warmup_candles": 1095,
+  "status": "PASS"
+}

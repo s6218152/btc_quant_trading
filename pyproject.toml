@@ -1,0 +1,22 @@
+[project]
+name = "btc-donchian-research"
+version = "0.1.0"
+requires-python = ">=3.11"
+description = "Reproducible Freqtrade BTCUSDT perpetual futures research"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q -p no:cacheprovider"
+pythonpath = [".", "user_data/strategies"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+include = ["scripts/**/*.py", "tests/**/*.py", "user_data/strategies/**/*.py"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+[tool.ruff.lint.isort]
+known-third-party = ["freqtrade", "numpy", "pandas", "pytest", "talib"]
+known-first-party = ["scripts", "Donchian4HStrategy"]

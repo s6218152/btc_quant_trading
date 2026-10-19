@@ -1,0 +1,26 @@
+{
+  "name": "retrospective_2024_h2",
+  "train": "20230401-20240701",
+  "test": "20240701-20250101",
+  "pristine": false,
+  "selected": {
+    "entry_period": 20,
+    "exit_period": 10,
+    "atr_multiplier": 2.0,
+    "risk_per_trade": 0.005
+  },
+  "training_runs": [
+    "335e0e7dc77a8f7e057e",
+    "2eae58e5a2f4373ffc77",
+    "2e9f044ec15e404bfcba",
+    "6b63672d72cef7ff14e0",
+    "fe4cb9ddb77460719991",
+    "55f966f118cf1d1f3ef1",
+    "3825c467e56d2c61b39b",
+    "91c8ec280fa35164f842",
+    "fa2232295d5dfb3638f7",
+    "6ef7ddfd0c7a470904bd",
+    "c1e7c350a328270b31db",
+    "0cb0313f8a231eb0d168"
+  ]
+}

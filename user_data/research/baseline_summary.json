@@ -1,0 +1,86 @@
+{
+  "study": "Donchian4H-V1-development-baseline",
+  "period": "20240101-20250101",
+  "starting_balance": 10000,
+  "final_balance": 10655.58750456,
+  "total_return": 0.065558750456,
+  "cagr": 0.06555875045600001,
+  "max_drawdown": 0.028371583031422214,
+  "sharpe_daily_wallet": 1.2364707141612785,
+  "sortino_daily_wallet": 2.4029069737331654,
+  "sharpe_native_trade_based": 0.3624003127140387,
+  "profit_factor": 2.34155057271591,
+  "win_rate": 0.3870967741935484,
+  "average_win_usdt": 95.35553659499999,
+  "average_loss_usdt": -25.71994392526316,
+  "expectancy_usdt": 21.14798401806452,
+  "total_trades": 31,
+  "long_trades": 27,
+  "short_trades": 4,
+  "max_consecutive_losses": 5,
+  "trading_fees_usdt": 40.9157739,
+  "slippage_proxy_usdt": 40.9157739,
+  "funding_costs_usdt": 67.22914765745406,
+  "integrity": {
+    "checks": {
+      "no_overlapping_positions": true,
+      "leverage_at_most_2": true,
+      "effective_exposure_at_most_2": true,
+      "budgeted_risk_at_most_limit": true,
+      "atr_stop_installed_and_tightened": true,
+      "pnl_reconciled": true,
+      "funding_reconciled": true,
+      "fee_proxy_reconciled": true,
+      "funding_mark_join_complete": true
+    },
+    "passed": true,
+    "max_budgeted_risk_fraction": 0.004992228514018917,
+    "max_pnl_error_usdt": 4.9510902044858085e-09,
+    "max_funding_error_usdt": 3.552713678800501e-15
+  },
+  "data_warnings": [
+    {
+      "issue": "Exchange daily volumes disagree with aggregated 4h volumes",
+      "dates": [
+        "2023-08-16 00:00:00+00:00",
+        "2023-11-10 00:00:00+00:00"
+      ],
+      "max_absolute_difference": 12053.294999999984,
+      "impact": "Daily EMA uses close only; entry uses 4h volume > 0; no volume sizing"
+    }
+  ],
+  "artifacts": {
+    "result_zip": "user_data/backtest_results/backtest-result-2026-10-18_16-18-32.zip",
+    "zip_sha256": "2493c9f14b54acb06815a7f36fe5c333c602a1758356b0e1512a410a464ba82c",
+    "bundled_files_sha256": {
+      "backtest-result-2026-10-18_16-18-32.json": "54a6ff1476c81a2786f1f094a163702875ebe19448f52ab30bf3bf15c05646ea",
+      "backtest-result-2026-10-18_16-18-32_config.json": "244fee6ce938b243e324409af46316b6330cbc709884f92509ca6a32b4c8c5da",
+      "backtest-result-2026-10-18_16-18-32_Donchian4HStrategy.py": "8b38553a5f812c1993342e98f91a4525ace3273eb44dd8fef0d47612f2fa73ed"
+    },
+    "data_manifest_sha256": "334ea688d3c8a29cb511a60aee91806d5b3b1058283f481cad673892c52496ec",
+    "market_rules_sha256": "a60b2d7f100a35fcadf7c12a1d1bcfe386ab24037b48d16798c990182ca559f7",
+    "execution_files_sha256": {
+      "Dockerfile.research": "dcb2dfe7dd297d965060b9b4db57f9b15d5fee1304025678c4909ce8f7ea843c",
+      "requirements-research.txt": "38d4a30616c96bee57596dd33ac3b52c79197d66343afa46a79d3e36260404aa",
+      "compose.yaml": "abad0f8a76b09104a4dad9d8aaeadce1b32fa0668c10f9b4631ad20918904457",
+      "user_data/config.json": "9462d7964b3f7f7eef511c31da3e9135804b8183bf2721282fb67fc400e9fd94",
+      "scripts/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "scripts/audit_data.py": "82923ec715f720a40dacade887bbb779e4905f1a1961465fddde5e5e7713c9ec",
+      "scripts/research.py": "ca00a71a5616be9c812cc903611d7e890308be72f3796bba45e8b89744d97465",
+      "scripts/snapshot_market.py": "4c8bd5df75522d64e0cc13bb48e7b7ff484d5e38a7d7fce14f062747b2e1c38f",
+      "scripts/summarize_backtest.py": "f44544a08089f6c718efcd058b48af3d5159da0e6b9557fc635765100010a5bf"
+    }
+  },
+  "limitations": [
+    "This is a correctness/development baseline, not a profitability claim.",
+    "The slippage proxy affects cash PnL through engine fees, not execution prices.",
+    "Funding reserve is zero for sizing; actual holding-period funding may exceed the risk budget.",
+    "Maker fees are documented but not applicable to this market-order baseline.",
+    "Walk-forward, parameter robustness and final OOS evaluation follow Phase 6.",
+    "4h intrabar sequence and stop fills follow Freqtrade assumptions; no order-book replay.",
+    "Liquidation prices/buffer are modeled; liquidation fees are not modeled by Freqtrade.",
+    "Exchange market metadata/precision are current, not point-in-time historical rules.",
+    "Export initial_stop_loss fields show emergency fallback; initial_atr_stop is reconstructed independently.",
+    "No walk-forward, parameter robustness or held-out OOS claim is made in Phase 6."
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "$schema": "https://schema.freqtrade.io/schema.json",
+  "strategy": "Donchian4HStrategy",
+  "timeframe": "4h",
+  "dry_run": true,
+  "dry_run_wallet": 10000,
+  "stake_currency": "USDT",
+  "stake_amount": "unlimited",
+  "tradable_balance_ratio": 1.0,
+  "max_open_trades": 1,
+  "trading_mode": "futures",
+  "margin_mode": "isolated",
+  "liquidation_buffer": 0.1,
+  "cancel_open_orders_on_exit": true,
+  "fee": 0.001,
+  "exchange": {
+    "name": "binance",
+    "key": "",
+    "secret": "",
+    "ccxt_config": {"enableRateLimit": true},
+    "ccxt_async_config": {"enableRateLimit": true},
+    "pair_whitelist": ["BTC/USDT:USDT"],
+    "pair_blacklist": []
+  },
+  "pairlists": [{"method": "StaticPairList"}],
+  "entry_pricing": {"price_side": "other", "use_order_book": true, "order_book_top": 1},
+  "exit_pricing": {"price_side": "other", "use_order_book": true, "order_book_top": 1},
+  "order_types": {
+    "entry": "market", "exit": "market", "stoploss": "market",
+    "stoploss_on_exchange": false
+  },
+  "unfilledtimeout": {"entry": 10, "exit": 10, "unit": "minutes"},
+  "telegram": {"enabled": false, "token": "", "chat_id": ""},
+  "dataformat_ohlcv": "feather",
+  "research": {
+    "risk_per_trade": 0.005,
+    "max_effective_leverage": 2.0,
+    "atr_multiplier": 2.5,
+    "entry_period": 20,
+    "exit_period": 10,
+    "daily_ema_period": 200,
+    "maker_fee": 0.0002,
+    "taker_fee": 0.0005,
+    "slippage_per_side": 0.0005,
+    "fee_model": "taker_plus_slippage_proxy",
+    "funding_reserve_per_trade": 0.0,
+    "margin_reserve": 0.02
+  }
+}

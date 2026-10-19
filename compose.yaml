@@ -1,0 +1,19 @@
+services:
+  research:
+    build:
+      context: .
+      dockerfile: Dockerfile.research
+    image: btc-donchian-research:2026.9
+    working_dir: /freqtrade
+    environment:
+      TZ: UTC
+      PYTHONPATH: /freqtrade
+    volumes:
+      - ./user_data:/freqtrade/user_data
+      - ./scripts:/freqtrade/scripts:ro
+      - ./tests:/freqtrade/tests:ro
+      - ./pyproject.toml:/freqtrade/pyproject.toml:ro
+      - ./Dockerfile.research:/freqtrade/Dockerfile.research:ro
+      - ./requirements-research.txt:/freqtrade/requirements-research.txt:ro
+      - ./compose.yaml:/freqtrade/compose.yaml:ro
+    command: ["list-strategies", "--config", "user_data/config.json"]

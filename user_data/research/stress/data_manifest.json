@@ -1,0 +1,97 @@
+{
+  "files": {
+    "4h": {
+      "file": "user_data/data/stress/futures/BTC_USDT_USDT-4h-futures.feather",
+      "sha256": "607c5ced62624aeea3e54940d805012702299a24c246a25a376db363b11f5635",
+      "rows": 13152,
+      "source": "unchanged frozen parent data"
+    },
+    "1d": {
+      "file": "user_data/data/stress/futures/BTC_USDT_USDT-1d-futures.feather",
+      "sha256": "f4f49a8265de3e85cfaee00b7c9c61da83e6c665527aa3be051ef8b50953cb91",
+      "rows": 2192,
+      "source": "unchanged frozen parent data"
+    },
+    "mark": {
+      "file": "user_data/data/stress/futures/BTC_USDT_USDT-1h-mark.feather",
+      "sha256": "1957ce3540661b9a4c6d4d010410cc92e7224927cb2e78515137931622677f39",
+      "rows": 52608,
+      "source": "unchanged frozen parent data"
+    },
+    "funding": {
+      "file": "user_data/data/stress/futures/BTC_USDT_USDT-1h-funding_rate.feather",
+      "sha256": "2db3e526d8af383bc8ee411e99149fba198a754b9d239b84019f8824ab4c67a3",
+      "rows": 6576,
+      "source": "unchanged frozen parent data"
+    },
+    "detail_1h": {
+      "rows": 17544,
+      "start": "2024-01-01 00:00:00+00:00",
+      "end": "2025-12-31 23:00:00+00:00",
+      "expected_rows": 17544,
+      "missing": 0,
+      "duplicate_count": 0,
+      "errors": [],
+      "file": "user_data/data/stress/futures/BTC_USDT_USDT-1h-futures.feather",
+      "sha256": "cfae0742756ce2a36c3bfeebdf814f5232ee8750a7aa11c96d730665462029e5"
+    },
+    "detail_15m": {
+      "rows": 70176,
+      "start": "2024-01-01 00:00:00+00:00",
+      "end": "2025-12-31 23:45:00+00:00",
+      "expected_rows": 70176,
+      "missing": 0,
+      "duplicate_count": 0,
+      "errors": [],
+      "file": "user_data/data/stress/futures/BTC_USDT_USDT-15m-futures.feather",
+      "sha256": "d3cb8e238d94e72970c30ea9d901206213e14b35c80fa44ca71301ba48434f36"
+    },
+    "mark_15m": {
+      "rows": 70176,
+      "start": "2024-01-01 00:00:00+00:00",
+      "end": "2025-12-31 23:45:00+00:00",
+      "expected_rows": 70176,
+      "missing": 0,
+      "duplicate_count": 0,
+      "errors": [],
+      "file": "user_data/data/stress/futures/BTC_USDT_USDT-15m-mark.feather",
+      "sha256": "ed60d8f2b4f0f07a4d48ec26b1951f3aae3d7b8ef2d82e90ca778914b6f31746"
+    }
+  },
+  "cross_timeframe": {
+    "15m_to_detail_1h_ohlc": false,
+    "15m_to_4h_ohlc": false,
+    "mark_hourly_open_equal": true
+  },
+  "warnings": [
+    {
+      "comparison": "15m_to_detail_1h",
+      "dates": [
+        "2024-10-28 20:00:00+00:00",
+        "2024-10-28 21:00:00+00:00"
+      ],
+      "max_price_difference": {
+        "open": 0.0,
+        "high": 10.60000000000582,
+        "low": 122.80000000000291,
+        "close": 120.19999999999709
+      },
+      "action": "Keep native REST details and frozen parent main bars unchanged"
+    },
+    {
+      "comparison": "15m_to_4h",
+      "dates": [
+        "2024-10-28 20:00:00+00:00"
+      ],
+      "max_price_difference": {
+        "open": 44.19999999999709,
+        "high": 0.0,
+        "low": 76.19999999999709,
+        "close": 0.0
+      },
+      "action": "Keep native REST details and frozen parent main bars unchanged"
+    }
+  ],
+  "detail_source": "Freqtrade Binance only_from_ccxt REST; no synthetic price repair",
+  "status": "PASS_WITH_WARNINGS"
+}

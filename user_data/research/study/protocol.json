@@ -1,0 +1,63 @@
+{
+  "study": "Donchian4H-V1-walk-forward-v1",
+  "freqtrade_version": "2026.9",
+  "data_start": "2020-01-01T00:00:00Z",
+  "data_end_exclusive": "2026-01-01T00:00:00Z",
+  "evaluation_start": "2022-10-01T00:00:00Z",
+  "evaluation_end_exclusive": "2026-01-01T00:00:00Z",
+  "reserved_final_test": "2026 is sealed: no evaluation or selection",
+  "funding_interval_hours": 8,
+  "development_range": "20240101-20250101",
+  "coarse_search": {
+    "method": "one-factor-at-a-time around the fixed V1 baseline",
+    "entry_period": [10, 20, 30, 40],
+    "exit_period": [5, 10, 15, 20],
+    "atr_multiplier": [2.0, 2.5, 3.0, 3.5],
+    "risk_per_trade": [0.0025, 0.005, 0.0075]
+  },
+  "refinement": {
+    "basis": "2024 development ONLY, before reading 2025 outcomes",
+    "gate": "best coarse daily-wallet Sharpe > 0.5 with >= 10 trades",
+    "entry_delta": [-5, 5],
+    "exit_delta": [-2, 2],
+    "atr_delta": [-0.25, 0.25],
+    "max_extra_candidates": 6
+  },
+  "selection": "eligible >=10 trades; maximize daily-wallet Sharpe; ties use lower drawdown then canonical config order; cash if no eligible candidate",
+  "folds": [
+    {"name": "retrospective_2024_h1", "train": "20221001-20240101", "test": "20240101-20240701", "pristine": false},
+    {"name": "retrospective_2024_h2", "train": "20230401-20240701", "test": "20240701-20250101", "pristine": false},
+    {"name": "oos_2025_h1", "train": "20231001-20250101", "test": "20250101-20250701", "pristine": true},
+    {"name": "oos_2025_h2", "train": "20240401-20250701", "test": "20250701-20260101", "pristine": true}
+  ],
+  "fold_accounting": "reset wallet to 10000 each fold; force-close at each boundary; report both independent folds and geometric linked return (not a continuous engine run)",
+  "cost_scenarios": {
+    "basis": "2024 development only; no selection from OOS cost outcomes",
+    "taker_fee": [0.0002, 0.0005, 0.0010],
+    "slippage_per_side": [0.00025, 0.0005, 0.0010]
+  },
+  "regimes": {
+    "label_at": "last completed daily candle before entry",
+    "direction_lookback_days": 90,
+    "bull_return_threshold": 0.15,
+    "bear_return_threshold": -0.15,
+    "annualized_high_vol_threshold": 0.60,
+    "historical_baseline_ranges": ["20221001-20230101", "20230101-20240101", "20240101-20250101", "20250101-20260101"]
+  },
+  "comparison": {
+    "range": "20250101-20260101",
+    "contract_leverage": 1.0,
+    "max_effective_leverage": 1.0,
+    "variants": ["Donchian with EMA", "Donchian without EMA", "1x perpetual buy-and-hold reference"],
+    "hold_allocation": 0.98,
+    "interpretation": "same capital, interval, 1x contract leverage, taker/slippage assumptions and actual funding; hold has no ATR risk budget and higher exposure, so this is descriptive, not equal-risk ranking"
+  },
+  "notes": [
+    "2024 was inspected in Phase 6; retrospective OOS is not pristine validation.",
+    "The full candidate pool uses 2024 development data and must not be applied retroactively to 2024 folds.",
+    "Retrospective folds use only the original 12 prespecified coarse candidates; refined candidates are eligible only for 2025 folds.",
+    "No 2025 outcomes may change candidate generation, thresholds, selection rule or protocol.",
+    "Native engine fees include a slippage cash-cost proxy; execution prices/order books are not replayed.",
+    "A one-year OOS and few short trades cannot establish long-term profitability."
+  ]
+}

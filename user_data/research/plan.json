@@ -1,0 +1,21 @@
+{
+  "study": "Donchian4H-V1-development-baseline",
+  "freqtrade_version": "2026.9",
+  "data_start": "2021-01-01T00:00:00Z",
+  "data_end_exclusive": "2025-01-01T00:00:00Z",
+  "evaluation_start": "2024-01-01T00:00:00Z",
+  "evaluation_end_exclusive": "2025-01-01T00:00:00Z",
+  "reserved_oos": "2025 calendar year; not evaluated in Phase 2-6",
+  "reserved_final_test": "2026; not evaluated or used for parameter selection",
+  "funding_interval_hours": 8,
+  "cost_model": "5 bps taker + 5 bps slippage proxy on each fill; actual funding",
+  "maker_fee_assumption_bps": 2,
+  "baseline_order_type": "market",
+  "notes": [
+    "This is a correctness/development baseline, not a profitability claim.",
+    "The slippage proxy affects cash PnL through engine fees, not execution prices.",
+    "Funding reserve is zero for sizing; actual holding-period funding may exceed the risk budget.",
+    "Maker fees are documented but not applicable to this market-order baseline.",
+    "Walk-forward, parameter robustness and final OOS evaluation follow Phase 6."
+  ]
+}

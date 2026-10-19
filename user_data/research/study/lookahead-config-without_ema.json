@@ -1,0 +1,17 @@
+{
+  "research": {
+    "risk_per_trade": 0.005,
+    "max_effective_leverage": 2.0,
+    "atr_multiplier": 2.5,
+    "entry_period": 20,
+    "exit_period": 10,
+    "daily_ema_period": 200,
+    "maker_fee": 0.0002,
+    "taker_fee": 0.0005,
+    "slippage_per_side": 0.0005,
+    "fee_model": "taker_plus_slippage_proxy",
+    "funding_reserve_per_trade": 0.0,
+    "margin_reserve": 0.02,
+    "ema_filter": false
+  }
+}

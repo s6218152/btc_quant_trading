@@ -1,0 +1,27 @@
+{
+  "passed": true,
+  "checks": {
+    "frozen_identity": true,
+    "data_integrity": true,
+    "source_identity": true,
+    "protocol_identity": true,
+    "all_native_hashes": true,
+    "all_native_source_matches": true,
+    "all_bounds_exclusive": true,
+    "all_contract_caps": true,
+    "accounting_and_risk": true,
+    "selections_match_training": true,
+    "decisions_precede_oos": true,
+    "final_2026_sealed": true,
+    "marked_equity_reconciles": true,
+    "environment_matches_lock": true
+  },
+  "unique_native_runs": 94,
+  "implementation_sha256": {
+    "scripts/study.py": "940add9997ffa93daeeb64ac3b247e410f87a1cc924f9af7ae67f94f211dc4aa",
+    "scripts/analyze_result.py": "af1a26f812722fb1c3cf8e4f05bf84bd873978b2d5b1672ea136d9cb94f3d5db",
+    "scripts/audit_data.py": "4d5c030efd34fe6b342d4e56e0e18760773349a9aedc20c4551373c4e0a5935e",
+    "scripts/validate_study.py": "51ed1effe6c20af9c9949e23bc76a5068eae289c6de88624716c0d9879e3f53f",
+    "scripts/mark_to_market.py": "ce6cb9d9c298d284ea9c2b8f71fbcbed34b5db6ecd2cc94d49b2d2e5648d09c6"
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "study": "Donchian4H-frozen-execution-and-risk-diagnostics-v1",
+  "classification": "Post-study diagnostics using already observed 2024/2025; not new pristine OOS",
+  "parent": "user_data/research/study/frozen_identity.json",
+  "data_start": "2024-01-01T00:00:00Z",
+  "data_end_exclusive": "2026-01-01T00:00:00Z",
+  "detail_timeframes": [
+    "1h",
+    "15m"
+  ],
+  "mark_timeframe": "15m",
+  "stress_scenarios": [
+    {
+      "name": "detail_1h",
+      "detail": "1h",
+      "delay_bars": 0,
+      "slippage_per_side": 0.0005
+    },
+    {
+      "name": "detail_15m",
+      "detail": "15m",
+      "delay_bars": 0,
+      "slippage_per_side": 0.0005
+    },
+    {
+      "name": "slip_20bps",
+      "detail": "15m",
+      "delay_bars": 0,
+      "slippage_per_side": 0.002
+    },
+    {
+      "name": "missed_4h_check",
+      "detail": "15m",
+      "delay_bars": 1,
+      "slippage_per_side": 0.0005
+    },
+    {
+      "name": "combined_adverse",
+      "detail": "15m",
+      "delay_bars": 1,
+      "slippage_per_side": 0.002
+    }
+  ],
+  "execution_constraints": [
+    "Use the previously selected 2025 H1/H2 parameters without re-selection.",
+    "Delay shifts entries by one complete 4h candle, represents a missed decision cycle, and re-sizes at actual entry using then-available ATR.",
+    "Exits use the existing frozen ATR/Donchian rules; no new exit parameter search.",
+    "Slippage remains an adverse cash-cost proxy. Market-order custom prices are not supported by Freqtrade; do not pretend limit-price hooks simulate market slippage.",
+    "Detail candles reduce intrabar ambiguity, but do not replay order books, queues or stop execution gaps."
+  ],
+  "risk_matching": {
+    "variants": [
+      "Donchian EMA",
+      "Donchian without EMA",
+      "1x perpetual hold"
+    ],
+    "fixed_parameters": {
+      "entry_period": 20,
+      "exit_period": 10,
+      "atr_multiplier": 2.5,
+      "risk_per_trade": 0.005
+    },
+    "training": "20240101-20250101",
+    "evaluation": "20250101-20260101",
+    "detail": "15m",
+    "contract_leverage": 1.0,
+    "max_effective_leverage": 1.0,
+    "initial_hold_allocation": 0.98,
+    "target_rule": "0.8 * minimum 2024 annualized Mark-equity volatility of the three unscaled variants",
+    "scaling_rule": "strategy risk fraction or hold allocation multiplied by target / training volatility; never exceed original exposure/risk settings",
+    "max_calibration_passes": 2,
+    "training_relative_vol_tolerance": 0.1,
+    "oos_rule": "Freeze calibrated weights BEFORE running 2025; never scale from 2025 volatility or returns",
+    "interpretation": "Ex-ante volatility budget matching, not identical tail/stop risk; disclose realized 2025 volatility mismatches. Hold reference is perpetual, not spot."
+  },
+  "sealed_final_test": "2026 remains excluded from all scoring, execution tests and calibration",
+  "source_quality": {
+    "detail_download": "Freqtrade native Binance REST with exchange.only_from_ccxt=true; retain original archive dataset separately",
+    "reason": "Archive 15m has synthetic zero-volume bars and erroneous lows; replace fine data with independent native REST download before first test. Frozen parent main candles stay unchanged.",
+    "allowed_bar_dates": [
+      "2024-10-28T20:00:00Z",
+      "2024-10-28T21:00:00Z"
+    ],
+    "treatment": "Record REST 15m/hour and frozen parent aggregation discrepancies as qualified source warnings; do not invent prices or overwrite parent data. Reject any other unregistered discrepancy and all zero-volume futures bars."
+  }
+}

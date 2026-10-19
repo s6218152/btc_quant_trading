@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "checks": {
+    "frozen_identity": true,
+    "2026_sealed": true,
+    "all_native_results_accounted": true,
+    "risk_training_tolerance": true,
+    "native_zip_hashes": true,
+    "native_configurations": true,
+    "accounting_and_mark_equity": true,
+    "weights_frozen_before_evaluation": true,
+    "no_2025_recalibration": true,
+    "native_strategy_bundles": true
+  },
+  "unique_native_runs": 20,
+  "implementation_sha256": "8b2ff095fa883b2206b0f46337ad9236958f3758773c5ee39410fa4adf2ac001"
+}

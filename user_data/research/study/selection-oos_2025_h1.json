@@ -1,0 +1,32 @@
+{
+  "name": "oos_2025_h1",
+  "train": "20231001-20250101",
+  "test": "20250101-20250701",
+  "pristine": true,
+  "selected": {
+    "entry_period": 15,
+    "exit_period": 15,
+    "atr_multiplier": 2.5,
+    "risk_per_trade": 0.005
+  },
+  "training_runs": [
+    "58ca2c4e0417acf59670",
+    "5ebd5c07a807efdd68ed",
+    "58d704e4a4d5a4c6737e",
+    "6ff5e5c4d8d2c917f886",
+    "1b945dad3193f34588be",
+    "274635336e66c1e5fe5a",
+    "59574c449f236be8a7ca",
+    "93e99e3d358f1d000ec1",
+    "9840e669dbb536400357",
+    "556f0f5f20b52b46be2e",
+    "c8036ebc573df11ced05",
+    "276d5fdcee935274e69f",
+    "e56f2415d58045a7dc8e",
+    "7cf92b5a0f53bbf87be0",
+    "116d00ed56e6b2816c02",
+    "311649666a92d1114280",
+    "c435d9dc34b0119ffefe",
+    "2974a2b3bdaca6ed7d03"
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "ccxt_version": "4.5.84",
+  "rules": {
+    "active": true,
+    "contractSize": 1.0,
+    "id": "BTCUSDT",
+    "inverse": false,
+    "limits": {
+      "amount": {
+        "max": 1000.0,
+        "min": 0.001
+      },
+      "cost": {
+        "max": null,
+        "min": 50.0
+      },
+      "leverage": {
+        "max": null,
+        "min": null
+      },
+      "market": {
+        "max": 120.0,
+        "min": 0.001
+      },
+      "price": {
+        "max": 4529764.0,
+        "min": 556.8
+      }
+    },
+    "linear": true,
+    "precision": {
+      "amount": 0.001,
+      "base": 1e-08,
+      "price": 0.1,
+      "quote": 1e-08
+    },
+    "symbol": "BTC/USDT:USDT"
+  },
+  "source": "Binance USDT-M public exchangeInfo"
+}

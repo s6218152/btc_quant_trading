@@ -1,0 +1,6 @@
+interface:
+  display_name: "Quant Strategy Validator"
+  short_description: "Validate causal signals, data, costs and walk-forward research"
+  default_prompt: "Use $quant-strategy-validator to audit the frozen Donchian research without opening the final holdout."
+policy:
+  allow_implicit_invocation: false

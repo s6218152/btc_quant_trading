@@ -24,3 +24,11 @@ logs/
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Freqtrade research outputs (manifests and reports remain versioned)
+user_data/data/
+user_data/backtest_results/
+user_data/logs/
+user_data/*.sqlite*
+.pytest_cache/
+.ruff_cache/

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Backtest Analyzer"
+  short_description: "Analyze Freqtrade performance, costs and drawdowns"
+  default_prompt: "Use $backtest-analyzer to summarize the frozen study results and limitations."
+policy:
+  allow_implicit_invocation: false
