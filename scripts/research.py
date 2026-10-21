@@ -124,6 +124,7 @@ def main() -> None:
             "dryrun-stop",
             "dryrun-status",
             "dryrun-logs",
+            "history",
         ],
     )
     parser.add_argument("--result", help="Repository-relative native result JSON or ZIP")
@@ -155,6 +156,7 @@ def main() -> None:
             cmd[cmd.index("--lookahead-analysis-exportfilename") + 1] = lookahead_file
     else:
         commands = {
+            "history": ["--entrypoint", "python", "research", "scripts/historical_backtest.py"],
             "test": ["--entrypoint", "python", "research", "-m", "pytest"],
             "lint": ["--entrypoint", "ruff", "research", "check", "."],
             "audit": ["--entrypoint", "python", "research", "scripts/audit_data.py"],
@@ -220,6 +222,7 @@ def main() -> None:
             "study",
             "stress",
             "stress-download",
+            "history",
         }
         else subprocess.run(cmd, cwd=ROOT).returncode
     )

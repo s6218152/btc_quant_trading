@@ -76,7 +76,8 @@ def native_timerange(period: str) -> str:
 
 
 class Study:
-    def __init__(self):
+    def __init__(self, results_root: Path | None = None):
+        self.results_root = results_root if results_root is not None else RESULTS
         self.protocol = json.loads(PROTOCOL.read_text())
         self.config = json.loads(BASE_CONFIG.read_text())
         if not self.config["dry_run"] or any(
@@ -128,7 +129,7 @@ class Study:
             "boundary_policy": "open_time_strictly_before_end_v1",
         }
         run_id = hashlib.sha256(canonical(key).encode()).hexdigest()[:20]
-        directory = RESULTS / run_id
+        directory = self.results_root / run_id
         directory.mkdir(parents=True, exist_ok=True)
         config_path = directory / "config.json"
         config_path.write_text(json.dumps(config, indent=2) + "\n")
@@ -215,7 +216,7 @@ class Study:
         return metrics
 
     def regime_breakdown(self, run: dict) -> list[dict]:
-        path = RESULTS / run["run_id"] / "trades.csv"
+        path = self.results_root / run["run_id"] / "trades.csv"
         if not path.exists():
             return []
         trades = pd.read_csv(path)
