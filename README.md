@@ -242,6 +242,28 @@ python3 scripts/research.py candidate-inception --allow-final-holdout
 資料截止為 UTC 2026-10-27 16:00（不含），最後原生 K 線時間戳為台北 10/27 20:00。
 結果見 [固定候選完整歷史報告](user_data/research/candidate_inception_20261027/REPORT.md)。
 
+## ETH 固定參數跨幣種評估（2026-10-28）
+
+```bash
+python3 scripts/research.py eth-history-download --allow-final-holdout
+python3 scripts/research.py eth-history --allow-final-holdout
+```
+
+ETH/USDT:USDT 使用與 BTC 只做多版相同的原始碼及參數，只更換交易對與獨立資料目錄。
+API 最早 4h 資料為 2019-11-27；2019-12-11 日線／4h 價格不一致，
+保留原始資料並僅排除該日以前的初始暖機段。保留 1000 根日線暖機後，
+正式績效自 2022-09-07 起，資料截止台北 2026-10-27 結束。
+
+完整結果：淨總報酬 0.90%、年化 0.22%、每小時時價最大回撤 6.47%，72 筆交易。
+含手續費、滑價現金成本代理及實際 Funding。早期 79 筆 Funding 缺少 Mark 對應，
+全都在不可交易的暖機期；正式交易期間配對完整，未以零補缺。
+這是固定參數描述性評估，沒有以 ETH 結果調參，也沒有改動 BTC VM。
+
+原始下載計畫保留於 `user_data/research/eth_history_20261027/`；發現暖機資料品質
+問題後，在任何績效回測前另凍結 v2 協議，正式結果見
+[ETH 完整歷史報告](user_data/research/eth_history_v2_20261027/REPORT.md)。
+凍結資料後下載指令會拒絕再次更新；可直接重跑評估指令核對固定結果。
+
 ## 框架依據
 
 - [安裝與 ARM64](https://www.freqtrade.io/en/stable/installation/)

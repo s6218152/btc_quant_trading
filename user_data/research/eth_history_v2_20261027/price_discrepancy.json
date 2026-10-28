@@ -1,0 +1,8 @@
+{
+  "dates": [
+    "2019-12-11 00:00:00+00:00"
+  ],
+  "different_cells": 4,
+  "verified_price_start": "2019-12-12T00:00:00+00:00",
+  "policy": "Exclude only the initial pre-2020 warmup prefix; keep original raw records"
+}

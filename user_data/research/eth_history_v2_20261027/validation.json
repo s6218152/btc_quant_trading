@@ -1,0 +1,22 @@
+{
+  "status": "PASS",
+  "checks": {
+    "native_archive_sha256": true,
+    "native_metrics_match": true,
+    "native_trades_match": true,
+    "only_eth_long_trades": true,
+    "final_mark_equity_reconciles": true,
+    "data_audit_passed": true,
+    "funding_fees_risk_reconciled": true,
+    "strategy_source_unchanged": true,
+    "base_strategy_unchanged": true,
+    "runner_snapshot_matches": true,
+    "exact_taipei_cutoff": true
+  },
+  "pytest_passed": 135,
+  "ruff": "PASS",
+  "protocol_sha256": "fd80a80c5475535444b678044839f937ab1226cfb5b424cbed671802ed783f7b",
+  "summary_sha256": "a665f3ed30243fd9fac1f822ea6c755d2e7f1bf369917bbd7616dac2f0c113b6",
+  "native_backtests": 1,
+  "selection_use": "none; BTC-selected parameters fixed; ETH only descriptive evaluation"
+}

@@ -130,6 +130,8 @@ def main() -> None:
             "return-study",
             "candidate-inception-download",
             "candidate-inception",
+            "eth-history-download",
+            "eth-history",
         ],
     )
     parser.add_argument("--result", help="Repository-relative native result JSON or ZIP")
@@ -142,12 +144,15 @@ def main() -> None:
     if args.profile and args.action != "dryrun-start":
         parser.error("--profile is only valid with dryrun-start")
     if args.action in {"inception", "inception-download",
-                       "candidate-inception", "candidate-inception-download"}:
+                       "candidate-inception", "candidate-inception-download",
+                       "eth-history", "eth-history-download"}:
         if not args.allow_final_holdout:
             parser.error("This isolated evaluation requires --allow-final-holdout")
-        module = (
-            "candidate_inception" if args.action.startswith("candidate-") else "inception_backtest"
-        )
+        module = "inception_backtest"
+        if args.action.startswith("candidate-"):
+            module = "candidate_inception"
+        elif args.action.startswith("eth-"):
+            module = "eth_history"
         command = ["docker", "compose", "run", "--rm", "--no-deps", "--entrypoint", "python",
                    "research", f"scripts/{module}.py",
                    "download" if args.action.endswith("-download") else "run",

@@ -1,0 +1,61 @@
+{
+  "status": "PASS",
+  "files": {
+    "4h": {
+      "rows": 15070,
+      "start": "2019-12-12 00:00:00+00:00",
+      "end": "2026-10-27 12:00:00+00:00",
+      "expected_rows": 15070,
+      "missing": 0,
+      "duplicate_count": 0,
+      "errors": [],
+      "file": "user_data/data/eth_history_20261027/futures/ETH_USDT_USDT-4h-futures.feather",
+      "sha256": "18bceb0e1b4de64ebbe297ff77c84ca637e98e6ea7d13f8bd651fffcb0f856f2"
+    },
+    "1d": {
+      "rows": 2511,
+      "start": "2019-12-12 00:00:00+00:00",
+      "end": "2026-10-26 00:00:00+00:00",
+      "expected_rows": 2511,
+      "missing": 0,
+      "duplicate_count": 0,
+      "errors": [],
+      "file": "user_data/data/eth_history_20261027/futures/ETH_USDT_USDT-1d-futures.feather",
+      "sha256": "df6ac23c154139a92359029829e2efd8bc9a6e11301bf71356df36ad8e39ec4e"
+    },
+    "mark": {
+      "rows": 60005,
+      "start": "2019-12-23 11:00:00+00:00",
+      "end": "2026-10-27 15:00:00+00:00",
+      "expected_rows": 60005,
+      "missing": 0,
+      "duplicate_count": 0,
+      "errors": [],
+      "file": "user_data/data/eth_history_20261027/futures/ETH_USDT_USDT-1h-mark.feather",
+      "sha256": "60ea7b6523f74c946007567af6d907f4c378e4c9c517c4bffe86efbb47b2ba09"
+    },
+    "funding": {
+      "rows": 7579,
+      "start": "2019-11-27 08:00:00+00:00",
+      "end": "2026-10-27 08:00:00+00:00",
+      "expected_rows": 7579,
+      "missing": 0,
+      "duplicate_count": 0,
+      "errors": [],
+      "file": "user_data/data/eth_history_20261027/futures/ETH_USDT_USDT-1h-funding_rate.feather",
+      "sha256": "e3fcdef8b6e65626c3b28d41952083fc0fe3c26ab5312d3c086034d0773f23c0"
+    }
+  },
+  "errors": [],
+  "verified_price_start": "2019-12-12T00:00:00+00:00",
+  "evaluation_start": "2022-09-07T00:00:00+00:00",
+  "end_exclusive": "2026-10-27T16:00:00+00:00",
+  "mismatched_price_cells": 0,
+  "inconsistent_days": [],
+  "excluded_warmup_price_dates": [
+    "2019-12-11 00:00:00+00:00"
+  ],
+  "unmatched_funding_events_in_warmup": 79,
+  "formal_funding_mark_join_complete": true,
+  "policy": "Initial inconsistent pre-2020 prefix excluded; no repairs or funding zero fill"
+}

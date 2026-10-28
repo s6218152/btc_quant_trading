@@ -1,0 +1,126 @@
+{
+  "strategy": "DonchianReturnStrategy",
+  "period": "1662508800-1793116799",
+  "actual_start": "2022-09-07 00:00:00",
+  "actual_end": "2026-10-27 12:00:00",
+  "starting_balance": 10000,
+  "final_balance": 10090.02259625,
+  "total_return": 0.009002259625,
+  "cagr": 0.002167217965235002,
+  "max_drawdown": 0.05935484249100009,
+  "sharpe": 0.0815860067883204,
+  "sortino": 0.09596767533001205,
+  "trade_sharpe": 0.01495027184492875,
+  "stats": {
+    "trades": 72,
+    "pnl_usdt": 90.02259624999999,
+    "win_rate": 0.3055555555555556,
+    "average_win": 77.18715697818182,
+    "average_loss": -32.1618971454,
+    "expectancy": 1.2503138368055555,
+    "profit_factor": 1.0559808992877622,
+    "max_consecutive_losses": 7
+  },
+  "long": {
+    "trades": 72,
+    "pnl_usdt": 90.02259624999999,
+    "win_rate": 0.3055555555555556,
+    "average_win": 77.18715697818182,
+    "average_loss": -32.1618971454,
+    "expectancy": 1.2503138368055555,
+    "profit_factor": 1.0559808992877622,
+    "max_consecutive_losses": 7
+  },
+  "short": {
+    "trades": 0,
+    "pnl_usdt": 0.0,
+    "win_rate": null,
+    "average_win": null,
+    "average_loss": null,
+    "expectancy": null,
+    "profit_factor": null,
+    "max_consecutive_losses": 0
+  },
+  "yearly_realized": {
+    "2023": {
+      "trades": 24,
+      "pnl_usdt": -190.00208901,
+      "win_rate": 0.25,
+      "average_win": 63.16627270666667,
+      "average_loss": -31.611095847222217,
+      "expectancy": -7.91675370875,
+      "profit_factor": 0.6660770109747959,
+      "max_consecutive_losses": 7
+    },
+    "2024": {
+      "trades": 27,
+      "pnl_usdt": -182.02815647999998,
+      "win_rate": 0.37037037037037035,
+      "average_win": 36.45871467,
+      "average_loss": -32.15384136352941,
+      "expectancy": -6.741783573333333,
+      "profit_factor": 0.6669903761913921,
+      "max_consecutive_losses": 4
+    },
+    "2025": {
+      "trades": 16,
+      "pnl_usdt": 568.0905717999999,
+      "win_rate": 0.3125,
+      "average_win": 180.97199049399998,
+      "average_loss": -30.61539824272727,
+      "expectancy": 35.505660737499994,
+      "profit_factor": 2.6868830850054963,
+      "max_consecutive_losses": 7
+    },
+    "2026": {
+      "trades": 5,
+      "pnl_usdt": -106.03773006,
+      "win_rate": 0.2,
+      "average_win": 49.67271811,
+      "average_loss": -38.9276120425,
+      "expectancy": -21.207546012,
+      "profit_factor": 0.3190069689849509,
+      "max_consecutive_losses": 4
+    }
+  },
+  "costs": {
+    "engine_fees_including_proxy": 160.38723837,
+    "trading_fees": 80.193619185,
+    "slippage_proxy": 80.193619185,
+    "funding_cost_net": 91.99215539882243,
+    "funding_paid": 91.99215539882245,
+    "funding_received": 0.0,
+    "pnl_error": 1.8822248648575624e-08
+  },
+  "average_entry_exposure": 0.11314537663748414,
+  "integrity": {
+    "checks": {
+      "no_overlapping_positions": true,
+      "leverage_at_most_2": true,
+      "effective_exposure_at_most_2": true,
+      "budgeted_risk_at_most_limit": true,
+      "atr_stop_installed_and_tightened": true,
+      "pnl_reconciled": true,
+      "funding_reconciled": true,
+      "fee_proxy_reconciled": true,
+      "funding_mark_join_complete": true
+    },
+    "passed": true,
+    "max_budgeted_risk_fraction": 0.004999950029590788,
+    "max_pnl_error_usdt": 4.835563061078574e-09,
+    "max_funding_error_usdt": 8.881784197001252e-16
+  },
+  "mark_to_market": {
+    "max_drawdown": 0.06470497863799018,
+    "sharpe_daily": 0.09090791220205237,
+    "sortino_daily": 0.15833903829597057,
+    "annualized_volatility": 0.02813728103225815,
+    "final_equity": 10090.022596249992,
+    "valuation": "hourly Mark Price open; native fills and exact funding events",
+    "selection_use": "none; reporting only, original training scores stay frozen"
+  },
+  "source": "user_data/backtest_results/eth_history_v2_20261027/backtest-result-2026-10-28_14-17-57.zip",
+  "source_sha256": "b3e55ec76bc3587422c99ce2f75615b9035461fbfae974aced662aa09303c771",
+  "protocol_sha256": "fd80a80c5475535444b678044839f937ab1226cfb5b424cbed671802ed783f7b",
+  "manifest_sha256": "025759d88b1678e1caf0dc7c66c384c9ceb7abfa4c178b1dc0d5445b8cb03ff2"
+}

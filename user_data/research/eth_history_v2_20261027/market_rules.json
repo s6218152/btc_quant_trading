@@ -1,0 +1,42 @@
+{
+  "source": "Binance USDT-M public exchangeInfo and earliest available 4h kline",
+  "ccxt_version": "4.5.84",
+  "onboard_ms": 1574840700000,
+  "first_4h_open": "2019-11-27T04:00:00.000Z",
+  "rules": {
+    "id": "ETHUSDT",
+    "symbol": "ETH/USDT:USDT",
+    "active": true,
+    "contractSize": 1.0,
+    "linear": true,
+    "inverse": false,
+    "precision": {
+      "amount": 0.001,
+      "price": 0.01,
+      "base": 1e-08,
+      "quote": 1e-08
+    },
+    "limits": {
+      "leverage": {
+        "min": null,
+        "max": null
+      },
+      "amount": {
+        "min": 0.001,
+        "max": 10000.0
+      },
+      "price": {
+        "min": 39.86,
+        "max": 306177.0
+      },
+      "cost": {
+        "min": 20.0,
+        "max": null
+      },
+      "market": {
+        "min": 0.001,
+        "max": 2000.0
+      }
+    }
+  }
+}
