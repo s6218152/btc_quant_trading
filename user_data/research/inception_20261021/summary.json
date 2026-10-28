@@ -1,0 +1,136 @@
+{
+  "strategy": "Donchian4HStrategy",
+  "period": "1655769600-1792583999",
+  "actual_start": "2022-06-21 00:00:00",
+  "actual_end": "2026-10-21 08:00:00",
+  "starting_balance": 10000,
+  "final_balance": 11387.1874125,
+  "total_return": 0.13871874125,
+  "cagr": 0.030405621067389088,
+  "max_drawdown": 0.047614390075342156,
+  "sharpe": 0.6363090950479144,
+  "sortino": 1.0804166220999576,
+  "trade_sharpe": 0.17795611623876925,
+  "stats": {
+    "trades": 127,
+    "pnl_usdt": 1387.1874125,
+    "win_rate": 0.33858267716535434,
+    "average_win": 95.53132418976746,
+    "average_loss": -32.38880390071429,
+    "expectancy": 10.922735531496063,
+    "profit_factor": 1.509871741905574,
+    "max_consecutive_losses": 9
+  },
+  "long": {
+    "trades": 78,
+    "pnl_usdt": 1460.0308950699996,
+    "win_rate": 0.34615384615384615,
+    "average_win": 116.18670612333334,
+    "average_loss": -32.88255235803922,
+    "expectancy": 18.718344808589737,
+    "profit_factor": 1.8706154088759281,
+    "max_consecutive_losses": 9
+  },
+  "short": {
+    "trades": 49,
+    "pnl_usdt": -72.84348256999988,
+    "win_rate": 0.32653061224489793,
+    "average_win": 60.675367176875,
+    "average_loss": -31.6257381030303,
+    "expectancy": -1.4866016851020383,
+    "profit_factor": 0.9302031069597246,
+    "max_consecutive_losses": 15
+  },
+  "yearly_realized": {
+    "2022": {
+      "trades": 14,
+      "pnl_usdt": -69.61029032,
+      "win_rate": 0.5,
+      "average_win": 24.653810534285718,
+      "average_loss": -34.598137722857146,
+      "expectancy": -4.972163594285715,
+      "profit_factor": 0.7125762297315286,
+      "max_consecutive_losses": 5
+    },
+    "2023": {
+      "trades": 28,
+      "pnl_usdt": 472.3055885299999,
+      "win_rate": 0.32142857142857145,
+      "average_win": 125.5134118888889,
+      "average_loss": -34.59553255105263,
+      "expectancy": 16.86805673321428,
+      "profit_factor": 1.7185375404560337,
+      "max_consecutive_losses": 9
+    },
+    "2024": {
+      "trades": 31,
+      "pnl_usdt": 680.61642753,
+      "win_rate": 0.3870967741935484,
+      "average_win": 98.95809401666666,
+      "average_loss": -26.677931614210525,
+      "expectancy": 21.95536863,
+      "profit_factor": 2.342754669156577,
+      "max_consecutive_losses": 5
+    },
+    "2025": {
+      "trades": 30,
+      "pnl_usdt": 58.68523292,
+      "win_rate": 0.23333333333333334,
+      "average_win": 111.09018094285715,
+      "average_loss": -31.258523203478262,
+      "expectancy": 1.9561744306666666,
+      "profit_factor": 1.08162675662819,
+      "max_consecutive_losses": 7
+    },
+    "2026": {
+      "trades": 24,
+      "pnl_usdt": 245.19045384,
+      "win_rate": 0.3333333333333333,
+      "average_win": 105.0651455775,
+      "average_loss": -37.20816942375,
+      "expectancy": 10.21626891,
+      "profit_factor": 1.4118558801019225,
+      "max_consecutive_losses": 6
+    }
+  },
+  "costs": {
+    "engine_fees_including_proxy": 397.60564110000007,
+    "trading_fees": 198.80282054999998,
+    "slippage_proxy": 198.80282054999998,
+    "funding_cost_net": 107.37284640619588,
+    "funding_paid": 134.85405518851766,
+    "funding_received": 27.481208782321755,
+    "pnl_error": 6.196614776854403e-09
+  },
+  "average_entry_exposure": 0.1447337920929671,
+  "integrity": {
+    "checks": {
+      "no_overlapping_positions": true,
+      "leverage_at_most_2": true,
+      "effective_exposure_at_most_2": true,
+      "budgeted_risk_at_most_limit": true,
+      "atr_stop_installed_and_tightened": true,
+      "pnl_reconciled": true,
+      "funding_reconciled": true,
+      "fee_proxy_reconciled": true,
+      "funding_mark_join_complete": true
+    },
+    "passed": true,
+    "max_budgeted_risk_fraction": 0.0049999077057739285,
+    "max_pnl_error_usdt": 4.9510902044858085e-09,
+    "max_funding_error_usdt": 8.881784197001252e-16
+  },
+  "mark_to_market": {
+    "max_drawdown": 0.05522338954586081,
+    "sharpe_daily": 0.7822098787168807,
+    "sortino_daily": 1.5558200722031057,
+    "annualized_volatility": 0.03924792557609857,
+    "final_equity": 11387.187412500007,
+    "valuation": "hourly Mark Price open; native fills and exact funding events",
+    "selection_use": "none; reporting only, original training scores stay frozen"
+  },
+  "source": "user_data/backtest_results/inception_20261021/backtest-result-2026-10-21_13-50-04.zip",
+  "source_sha256": "8847cd1e57a36d512260cc25eebe67d9f8dad252496d72f5cdf9ec2a2923ce54",
+  "protocol_sha256": "f155b960d4b5be7b88adaa6362ef8e97bbf13e5d6ba85b8fd7479c0f37c278d0",
+  "runner_sha256": "62fd7aab3204568a035e452442f42f88e38c20a3eecd9f98e5f6bf19d3381b37"
+}

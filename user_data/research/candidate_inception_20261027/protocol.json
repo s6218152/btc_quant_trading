@@ -1,0 +1,39 @@
+{
+  "authorization": "User requested candidate inception through yesterday, on 2026-10-28",
+  "mode": "Fixed descriptive evaluation; 2025/2026 opened, no tuning or reselection",
+  "requested_start": "2019-09-09T00:00:00Z",
+  "through_local_date": "2026-10-27",
+  "timezone": "Asia/Taipei",
+  "end_exclusive": "2026-10-27T16:00:00+00:00",
+  "verified_price_start": "2019-09-25T00:00:00+00:00",
+  "warmup_daily_candles": 1000,
+  "selected_candidate": "long_only",
+  "original_identity": {
+    "protocol": "8e902bcf3d2963b869733810a44c40595436bce8fb9c08fa99eb1195cec2a18b",
+    "base_config": "9462d7964b3f7f7eef511c31da3e9135804b8183bf2721282fb67fc400e9fd94",
+    "strategy": "e7486557c67c7824989676f2e7293bfbce17404d9e3533a98469220d20e45892",
+    "reference": "643708df44e657f30becea956e025ef9a6651268f3153ee6778287fdba4e8f2d",
+    "environment": "b4d4153908569861dbb3dbe909ccdef08f743b21668b9d7558f62b0cfb332d5c",
+    "market_rules": "a60b2d7f100a35fcadf7c12a1d1bcfe386ab24037b48d16798c990182ca559f7",
+    "data": {
+      "4h": "607c5ced62624aeea3e54940d805012702299a24c246a25a376db363b11f5635",
+      "1d": "f4f49a8265de3e85cfaee00b7c9c61da83e6c665527aa3be051ef8b50953cb91",
+      "mark": "1957ce3540661b9a4c6d4d010410cc92e7224927cb2e78515137931622677f39",
+      "funding": "2db3e526d8af383bc8ee411e99149fba198a754b9d239b84019f8824ab4c67a3"
+    }
+  },
+  "candidate_source_sha256": "e7521dbb7336cb35168c80d1234aebd9d8ea4eb4d31c145236c00a47f4ca07e8",
+  "candidate_config_sha256": "91ea3283e766b52578f6e239f05d0cc524a7f02f28f00284ca2a6222a1304854",
+  "baseline_config_sha256": "57ffa47f63d6c0001230d05657d1c4f3d340072c5034c4d9bd3b7a0f9d0008ad",
+  "accepted_revision_sha256": "761c80d673597e099acb67b0eea3405aab7d3bc782317972465bd63a054fbddd",
+  "seed_manifest_sha256": "5f3f8bd5aa34c4fb95f1e7e89ca42d815369cb59eab43fc88640309de589a35d",
+  "runner_sha256": "2a0811c1924c33d95392f634e4d90cc9ec8ca4d7fcfeb49b2c0e0e3b453ee057",
+  "supporting_code": {
+    "study.py": "c547f378138767c8a1cb40ccb5cddcd5476eefd04a33cdfa8559da8be3b07b07",
+    "audit_data.py": "4d5c030efd34fe6b342d4e56e0e18760773349a9aedc20c4551373c4e0a5935e",
+    "analyze_result.py": "af1a26f812722fb1c3cf8e4f05bf84bd873978b2d5b1672ea136d9cb94f3d5db",
+    "summarize_backtest.py": "f44544a08089f6c718efcd058b48af3d5159da0e6b9557fc635765100010a5bf",
+    "mark_to_market.py": "ce6cb9d9c298d284ea9c2b8f71fbcbed34b5db6ecd2cc94d49b2d2e5648d09c6",
+    "snapshot_market.py": "4c8bd5df75522d64e0cc13bb48e7b7ff484d5e38a7d7fce14f062747b2e1c38f"
+  }
+}

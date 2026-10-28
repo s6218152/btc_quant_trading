@@ -1,0 +1,917 @@
+{
+  "selected": "long_only",
+  "accepted": true,
+  "runs": {
+    "selection": {
+      "baseline": {
+        "strategy": "Donchian4HStrategy",
+        "period": "20230101-20240101",
+        "actual_start": "2023-01-01 00:00:00",
+        "actual_end": "2023-12-31 20:00:00",
+        "starting_balance": 10000,
+        "final_balance": 10467.62408589,
+        "total_return": 0.04676240858899999,
+        "cagr": 0.046893842979822464,
+        "max_drawdown": 0.04759257387496714,
+        "sharpe": 0.7073216153298539,
+        "sortino": 1.6033176795823811,
+        "trade_sharpe": 0.19083745554371576,
+        "stats": {
+          "trades": 27,
+          "pnl_usdt": 467.62408588999995,
+          "win_rate": 0.2962962962962963,
+          "average_win": 141.13309985875,
+          "average_loss": -34.81266910421052,
+          "expectancy": 17.319410588518515,
+          "profit_factor": 1.7069780808973876,
+          "max_consecutive_losses": 9
+        },
+        "long": {
+          "trades": 22,
+          "pnl_usdt": 505.88327374999983,
+          "win_rate": 0.2727272727272727,
+          "average_win": 175.42311348500002,
+          "average_loss": -34.1659629475,
+          "expectancy": 22.99469426136363,
+          "profit_factor": 1.9254152929323054,
+          "max_consecutive_losses": 9
+        },
+        "short": {
+          "trades": 5,
+          "pnl_usdt": -38.25918786,
+          "win_rate": 0.4,
+          "average_win": 38.26305898,
+          "average_loss": -38.261768606666664,
+          "expectancy": -7.651837572,
+          "profit_factor": 0.6666891499161404,
+          "max_consecutive_losses": 2
+        },
+        "yearly_realized": {
+          "2023": {
+            "trades": 27,
+            "pnl_usdt": 467.62408588999995,
+            "win_rate": 0.2962962962962963,
+            "average_win": 141.13309985875,
+            "average_loss": -34.81266910421052,
+            "expectancy": 17.319410588518515,
+            "profit_factor": 1.7069780808973876,
+            "max_consecutive_losses": 9
+          }
+        },
+        "costs": {
+          "engine_fees_including_proxy": 88.45330210000002,
+          "trading_fees": 44.22665105,
+          "slippage_proxy": 44.22665105,
+          "funding_cost_net": 32.27691200650236,
+          "funding_paid": 33.524010146635234,
+          "funding_received": 1.2470981401328722,
+          "pnl_error": 3.4974050322489347e-09
+        },
+        "average_entry_exposure": 0.15986990387213532,
+        "run_id": "c097f3bdb01c7e812c7c",
+        "params": {
+          "entry_period": 20,
+          "exit_period": 10,
+          "atr_multiplier": 2.5,
+          "risk_per_trade": 0.005,
+          "long_only": false,
+          "adx_filter": false
+        },
+        "kind": "return_revision_selection",
+        "integrity": {
+          "checks": {
+            "no_overlapping_positions": true,
+            "leverage_at_most_2": true,
+            "effective_exposure_at_most_2": true,
+            "budgeted_risk_at_most_limit": true,
+            "atr_stop_installed_and_tightened": true,
+            "pnl_reconciled": true,
+            "funding_reconciled": true,
+            "fee_proxy_reconciled": true,
+            "funding_mark_join_complete": true
+          },
+          "passed": true,
+          "max_budgeted_risk_fraction": 0.0049975500207488956,
+          "max_pnl_error_usdt": 4.978382150966354e-09,
+          "max_funding_error_usdt": 8.881784197001252e-16
+        },
+        "source": "user_data/backtest_results/return_revision_20261028/c097f3bdb01c7e812c7c/backtest-result-2026-10-28_04-58-41.zip",
+        "mark_to_market": {
+          "max_drawdown": 0.05515158071892878,
+          "sharpe_daily": 0.9662348877550917,
+          "sortino_daily": 2.4510743196233005,
+          "annualized_volatility": 0.048503227597000924,
+          "final_equity": 10467.624085890002,
+          "valuation": "hourly Mark Price open; native fills and exact funding events",
+          "selection_use": "Drawdown eligibility for this NEW experiment only; frozen original study unchanged"
+        },
+        "source_sha256": "81df0a7eda5d4dc320367fd839e85618bc3ac8b725bc2a4d87d3a8ee40ec5a57"
+      },
+      "long_only": {
+        "strategy": "DonchianReturnStrategy",
+        "period": "20230101-20240101",
+        "actual_start": "2023-01-01 00:00:00",
+        "actual_end": "2023-12-31 20:00:00",
+        "starting_balance": 10000,
+        "final_balance": 10739.82311117,
+        "total_return": 0.07398231111700002,
+        "cagr": 0.07419291941352002,
+        "max_drawdown": 0.0232189257436546,
+        "sharpe": 1.0655539749251641,
+        "sortino": 2.290876659433411,
+        "trade_sharpe": 0.26524702237356534,
+        "stats": {
+          "trades": 22,
+          "pnl_usdt": 739.8231111700002,
+          "win_rate": 0.3181818181818182,
+          "average_win": 177.57550008142854,
+          "average_loss": -33.547025960000006,
+          "expectancy": 33.62832323500001,
+          "profit_factor": 2.470220960972084,
+          "max_consecutive_losses": 5
+        },
+        "long": {
+          "trades": 22,
+          "pnl_usdt": 739.8231111700002,
+          "win_rate": 0.3181818181818182,
+          "average_win": 177.57550008142854,
+          "average_loss": -33.547025960000006,
+          "expectancy": 33.62832323500001,
+          "profit_factor": 2.470220960972084,
+          "max_consecutive_losses": 5
+        },
+        "short": {
+          "trades": 0,
+          "pnl_usdt": 0.0,
+          "win_rate": null,
+          "average_win": null,
+          "average_loss": null,
+          "expectancy": null,
+          "profit_factor": null,
+          "max_consecutive_losses": 0
+        },
+        "yearly_realized": {
+          "2023": {
+            "trades": 22,
+            "pnl_usdt": 739.8231111700002,
+            "win_rate": 0.3181818181818182,
+            "average_win": 177.57550008142854,
+            "average_loss": -33.547025960000006,
+            "expectancy": 33.62832323500001,
+            "profit_factor": 2.470220960972084,
+            "max_consecutive_losses": 5
+          }
+        },
+        "costs": {
+          "engine_fees_including_proxy": 74.29375580000001,
+          "trading_fees": 37.14687789999999,
+          "slippage_proxy": 37.14687789999999,
+          "funding_cost_net": 36.034133035751935,
+          "funding_paid": 36.034133035751935,
+          "funding_received": 0.0,
+          "pnl_error": 5.7524403018760495e-09
+        },
+        "average_entry_exposure": 0.161643035408082,
+        "run_id": "d301c61b50a54b89011b",
+        "params": {
+          "entry_period": 20,
+          "exit_period": 10,
+          "atr_multiplier": 2.5,
+          "risk_per_trade": 0.005,
+          "long_only": true,
+          "adx_filter": false
+        },
+        "kind": "return_revision_selection",
+        "integrity": {
+          "checks": {
+            "no_overlapping_positions": true,
+            "leverage_at_most_2": true,
+            "effective_exposure_at_most_2": true,
+            "budgeted_risk_at_most_limit": true,
+            "atr_stop_installed_and_tightened": true,
+            "pnl_reconciled": true,
+            "funding_reconciled": true,
+            "fee_proxy_reconciled": true,
+            "funding_mark_join_complete": true
+          },
+          "passed": true,
+          "max_budgeted_risk_fraction": 0.004996320564103425,
+          "max_pnl_error_usdt": 4.752337190438993e-09,
+          "max_funding_error_usdt": 4.440892098500626e-16
+        },
+        "source": "user_data/backtest_results/return_revision_20261028/d301c61b50a54b89011b/backtest-result-2026-10-28_04-58-44.zip",
+        "mark_to_market": {
+          "max_drawdown": 0.030381178986194857,
+          "sharpe_daily": 1.485677251744767,
+          "sortino_daily": 4.096896087351575,
+          "annualized_volatility": 0.04883768037885783,
+          "final_equity": 10739.823111169999,
+          "valuation": "hourly Mark Price open; native fills and exact funding events",
+          "selection_use": "Drawdown eligibility for this NEW experiment only; frozen original study unchanged"
+        },
+        "source_sha256": "c87a412e1998eaf3bf9c5e53068389a1bbc5006a750735104cbbb2208264ecf2"
+      },
+      "adx_only": {
+        "strategy": "DonchianReturnStrategy",
+        "period": "20230101-20240101",
+        "actual_start": "2023-01-01 00:00:00",
+        "actual_end": "2023-12-31 20:00:00",
+        "starting_balance": 10000,
+        "final_balance": 10728.4196918,
+        "total_return": 0.07284196918000001,
+        "cagr": 0.0730492221018888,
+        "max_drawdown": 0.009509623304183505,
+        "sharpe": 1.4355884325027894,
+        "sortino": 2.510054220973355,
+        "trade_sharpe": 0.3264132059081436,
+        "stats": {
+          "trades": 17,
+          "pnl_usdt": 728.4196918,
+          "win_rate": 0.5294117647058824,
+          "average_win": 109.98392344222222,
+          "average_loss": -32.6794523975,
+          "expectancy": 42.848217164705886,
+          "profit_factor": 3.786229719135856,
+          "max_consecutive_losses": 2
+        },
+        "long": {
+          "trades": 15,
+          "pnl_usdt": 651.72296466,
+          "win_rate": 0.4666666666666667,
+          "average_win": 130.45122626285715,
+          "average_loss": -32.6794523975,
+          "expectancy": 43.448197644,
+          "profit_factor": 3.4928621689123576,
+          "max_consecutive_losses": 2
+        },
+        "short": {
+          "trades": 2,
+          "pnl_usdt": 76.69672714,
+          "win_rate": 1.0,
+          "average_win": 38.34836357,
+          "average_loss": null,
+          "expectancy": 38.34836357,
+          "profit_factor": null,
+          "max_consecutive_losses": 0
+        },
+        "yearly_realized": {
+          "2023": {
+            "trades": 17,
+            "pnl_usdt": 728.4196918,
+            "win_rate": 0.5294117647058824,
+            "average_win": 109.98392344222222,
+            "average_loss": -32.6794523975,
+            "expectancy": 42.848217164705886,
+            "profit_factor": 3.786229719135856,
+            "max_consecutive_losses": 2
+          }
+        },
+        "costs": {
+          "engine_fees_including_proxy": 49.7228614,
+          "trading_fees": 24.8614307,
+          "slippage_proxy": 24.8614307,
+          "funding_cost_net": 27.20284680644764,
+          "funding_paid": 27.565158046378407,
+          "funding_received": 0.3623112399307702,
+          "pnl_error": 6.447749001381453e-09
+        },
+        "average_entry_exposure": 0.13977975499333617,
+        "run_id": "7c0ba5e99e8c22898599",
+        "params": {
+          "entry_period": 20,
+          "exit_period": 10,
+          "atr_multiplier": 2.5,
+          "risk_per_trade": 0.005,
+          "long_only": false,
+          "adx_filter": true
+        },
+        "kind": "return_revision_selection",
+        "integrity": {
+          "checks": {
+            "no_overlapping_positions": true,
+            "leverage_at_most_2": true,
+            "effective_exposure_at_most_2": true,
+            "budgeted_risk_at_most_limit": true,
+            "atr_stop_installed_and_tightened": true,
+            "pnl_reconciled": true,
+            "funding_reconciled": true,
+            "fee_proxy_reconciled": true,
+            "funding_mark_join_complete": true
+          },
+          "passed": true,
+          "max_budgeted_risk_fraction": 0.004996073954546178,
+          "max_pnl_error_usdt": 4.902595662770182e-09,
+          "max_funding_error_usdt": 8.881784197001252e-16
+        },
+        "source": "user_data/backtest_results/return_revision_20261028/7c0ba5e99e8c22898599/backtest-result-2026-10-28_04-58-47.zip",
+        "mark_to_market": {
+          "max_drawdown": 0.018388940568154766,
+          "sharpe_daily": 1.7488231846684035,
+          "sortino_daily": 4.686326137478447,
+          "annualized_volatility": 0.0406766152456397,
+          "final_equity": 10728.419691799998,
+          "valuation": "hourly Mark Price open; native fills and exact funding events",
+          "selection_use": "Drawdown eligibility for this NEW experiment only; frozen original study unchanged"
+        },
+        "source_sha256": "d94221a829d22434fd29a2c0dca8a32fa07102b1b076317d2fab600ac7ff0dc5"
+      },
+      "long_adx": {
+        "strategy": "DonchianReturnStrategy",
+        "period": "20230101-20240101",
+        "actual_start": "2023-01-01 00:00:00",
+        "actual_end": "2023-12-31 20:00:00",
+        "starting_balance": 10000,
+        "final_balance": 10648.59035771,
+        "total_return": 0.06485903577100001,
+        "cagr": 0.06504289320471157,
+        "max_drawdown": 0.00947256772186428,
+        "sharpe": 1.3012793400847882,
+        "sortino": 2.2694951807503565,
+        "trade_sharpe": 0.27722041931530084,
+        "stats": {
+          "trades": 15,
+          "pnl_usdt": 648.59035771,
+          "win_rate": 0.4666666666666667,
+          "average_win": 129.62857351285714,
+          "average_loss": -32.351207110000004,
+          "expectancy": 43.239357180666666,
+          "profit_factor": 3.5060516115545335,
+          "max_consecutive_losses": 2
+        },
+        "long": {
+          "trades": 15,
+          "pnl_usdt": 648.59035771,
+          "win_rate": 0.4666666666666667,
+          "average_win": 129.62857351285714,
+          "average_loss": -32.351207110000004,
+          "expectancy": 43.239357180666666,
+          "profit_factor": 3.5060516115545335,
+          "max_consecutive_losses": 2
+        },
+        "short": {
+          "trades": 0,
+          "pnl_usdt": 0.0,
+          "win_rate": null,
+          "average_win": null,
+          "average_loss": null,
+          "expectancy": null,
+          "profit_factor": null,
+          "max_consecutive_losses": 0
+        },
+        "yearly_realized": {
+          "2023": {
+            "trades": 15,
+            "pnl_usdt": 648.59035771,
+            "win_rate": 0.4666666666666667,
+            "average_win": 129.62857351285714,
+            "average_loss": -32.351207110000004,
+            "expectancy": 43.239357180666666,
+            "profit_factor": 3.5060516115545335,
+            "max_consecutive_losses": 2
+          }
+        },
+        "costs": {
+          "engine_fees_including_proxy": 44.3275372,
+          "trading_fees": 22.163768600000004,
+          "slippage_proxy": 22.163768600000004,
+          "funding_cost_net": 27.488505098870487,
+          "funding_paid": 27.488505098870487,
+          "funding_received": 0.0,
+          "pnl_error": 8.870642886904534e-09
+        },
+        "average_entry_exposure": 0.141415607942499,
+        "run_id": "d462831ae4d35d119332",
+        "params": {
+          "entry_period": 20,
+          "exit_period": 10,
+          "atr_multiplier": 2.5,
+          "risk_per_trade": 0.005,
+          "long_only": true,
+          "adx_filter": true
+        },
+        "kind": "return_revision_selection",
+        "integrity": {
+          "checks": {
+            "no_overlapping_positions": true,
+            "leverage_at_most_2": true,
+            "effective_exposure_at_most_2": true,
+            "budgeted_risk_at_most_limit": true,
+            "atr_stop_installed_and_tightened": true,
+            "pnl_reconciled": true,
+            "funding_reconciled": true,
+            "fee_proxy_reconciled": true,
+            "funding_mark_join_complete": true
+          },
+          "passed": true,
+          "max_budgeted_risk_fraction": 0.004998704785270711,
+          "max_pnl_error_usdt": 4.902595662770182e-09,
+          "max_funding_error_usdt": 8.881784197001252e-16
+        },
+        "source": "user_data/backtest_results/return_revision_20261028/d462831ae4d35d119332/backtest-result-2026-10-28_04-58-50.zip",
+        "mark_to_market": {
+          "max_drawdown": 0.018310560492662775,
+          "sharpe_daily": 1.6211143218546324,
+          "sortino_daily": 4.4019888985165485,
+          "annualized_volatility": 0.03923785067060536,
+          "final_equity": 10648.590357709998,
+          "valuation": "hourly Mark Price open; native fills and exact funding events",
+          "selection_use": "Drawdown eligibility for this NEW experiment only; frozen original study unchanged"
+        },
+        "source_sha256": "044cbaf852421fccabbf6f57c0760541ca4ae557d10f68a3875e362009e2223d"
+      }
+    },
+    "confirmation": {
+      "baseline": {
+        "strategy": "Donchian4HStrategy",
+        "period": "20240101-20250101",
+        "actual_start": "2024-01-01 00:00:00",
+        "actual_end": "2024-12-31 20:00:00",
+        "starting_balance": 10000,
+        "final_balance": 10655.58750456,
+        "total_return": 0.065558750456,
+        "cagr": 0.06555875045600001,
+        "max_drawdown": 0.028371583031422214,
+        "sharpe": 1.2364707141612785,
+        "sortino": 2.4029069737331654,
+        "trade_sharpe": 0.3624003127140387,
+        "stats": {
+          "trades": 31,
+          "pnl_usdt": 655.5875045600001,
+          "win_rate": 0.3870967741935484,
+          "average_win": 95.35553659499999,
+          "average_loss": -25.71994392526316,
+          "expectancy": 21.14798401806452,
+          "profit_factor": 2.34155057271591,
+          "max_consecutive_losses": 5
+        },
+        "long": {
+          "trades": 27,
+          "pnl_usdt": 798.11918826,
+          "win_rate": 0.4444444444444444,
+          "average_win": 95.35553659499999,
+          "average_loss": -23.076483392,
+          "expectancy": 29.559969935555554,
+          "profit_factor": 3.3057215859174525,
+          "max_consecutive_losses": 5
+        },
+        "short": {
+          "trades": 4,
+          "pnl_usdt": -142.5316837,
+          "win_rate": 0.0,
+          "average_win": null,
+          "average_loss": -35.632920925,
+          "expectancy": -35.632920925,
+          "profit_factor": 0.0,
+          "max_consecutive_losses": 4
+        },
+        "yearly_realized": {
+          "2024": {
+            "trades": 31,
+            "pnl_usdt": 655.5875045600001,
+            "win_rate": 0.3870967741935484,
+            "average_win": 95.35553659499999,
+            "average_loss": -25.71994392526316,
+            "expectancy": 21.14798401806452,
+            "profit_factor": 2.34155057271591,
+            "max_consecutive_losses": 5
+          }
+        },
+        "costs": {
+          "engine_fees_including_proxy": 81.83154780000001,
+          "trading_fees": 40.9157739,
+          "slippage_proxy": 40.9157739,
+          "funding_cost_net": 67.22914765745406,
+          "funding_paid": 67.4818322934296,
+          "funding_received": 0.2526846359755332,
+          "pnl_error": 1.7453999134886544e-08
+        },
+        "average_entry_exposure": 0.1243480928867125,
+        "run_id": "e3b55dabdafcd1125127",
+        "params": {
+          "entry_period": 20,
+          "exit_period": 10,
+          "atr_multiplier": 2.5,
+          "risk_per_trade": 0.005,
+          "long_only": false,
+          "adx_filter": false
+        },
+        "kind": "return_revision_confirmation",
+        "integrity": {
+          "checks": {
+            "no_overlapping_positions": true,
+            "leverage_at_most_2": true,
+            "effective_exposure_at_most_2": true,
+            "budgeted_risk_at_most_limit": true,
+            "atr_stop_installed_and_tightened": true,
+            "pnl_reconciled": true,
+            "funding_reconciled": true,
+            "fee_proxy_reconciled": true,
+            "funding_mark_join_complete": true
+          },
+          "passed": true,
+          "max_budgeted_risk_fraction": 0.004992228514018917,
+          "max_pnl_error_usdt": 4.9510902044858085e-09,
+          "max_funding_error_usdt": 3.552713678800501e-15
+        },
+        "source": "user_data/backtest_results/return_revision_20261028/e3b55dabdafcd1125127/backtest-result-2026-10-28_04-58-54.zip",
+        "mark_to_market": {
+          "max_drawdown": 0.038719064915980206,
+          "sharpe_daily": 1.6084979086357463,
+          "sortino_daily": 3.207993504596581,
+          "annualized_volatility": 0.039863735238004544,
+          "final_equity": 10655.587504559995,
+          "valuation": "hourly Mark Price open; native fills and exact funding events",
+          "selection_use": "Drawdown eligibility for this NEW experiment only; frozen original study unchanged"
+        },
+        "source_sha256": "bf5be5edccede174524eb8a0dc0ee7861b33c073ac5e2992d6d265c0f84012a6"
+      },
+      "long_only": {
+        "strategy": "DonchianReturnStrategy",
+        "period": "20240101-20250101",
+        "actual_start": "2024-01-01 00:00:00",
+        "actual_end": "2024-12-31 20:00:00",
+        "starting_balance": 10000,
+        "final_balance": 10713.75014774,
+        "total_return": 0.071375014774,
+        "cagr": 0.07137501477399999,
+        "max_drawdown": 0.022802184589808566,
+        "sharpe": 1.3484575078405856,
+        "sortino": 2.853741327189454,
+        "trade_sharpe": 0.3925423962192392,
+        "stats": {
+          "trades": 30,
+          "pnl_usdt": 713.75014774,
+          "win_rate": 0.4,
+          "average_win": 95.35553659499999,
+          "average_loss": -23.917571744444444,
+          "expectancy": 23.791671591333333,
+          "profit_factor": 2.6578934688370306,
+          "max_consecutive_losses": 5
+        },
+        "long": {
+          "trades": 30,
+          "pnl_usdt": 713.75014774,
+          "win_rate": 0.4,
+          "average_win": 95.35553659499999,
+          "average_loss": -23.917571744444444,
+          "expectancy": 23.791671591333333,
+          "profit_factor": 2.6578934688370306,
+          "max_consecutive_losses": 5
+        },
+        "short": {
+          "trades": 0,
+          "pnl_usdt": 0.0,
+          "win_rate": null,
+          "average_win": null,
+          "average_loss": null,
+          "expectancy": null,
+          "profit_factor": null,
+          "max_consecutive_losses": 0
+        },
+        "yearly_realized": {
+          "2024": {
+            "trades": 30,
+            "pnl_usdt": 713.75014774,
+            "win_rate": 0.4,
+            "average_win": 95.35553659499999,
+            "average_loss": -23.917571744444444,
+            "expectancy": 23.791671591333333,
+            "profit_factor": 2.6578934688370306,
+            "max_consecutive_losses": 5
+          }
+        },
+        "costs": {
+          "engine_fees_including_proxy": 81.62405520000002,
+          "trading_fees": 40.8120276,
+          "slippage_proxy": 40.8120276,
+          "funding_cost_net": 67.4113970670259,
+          "funding_paid": 67.48624363880063,
+          "funding_received": 0.07484657177473497,
+          "pnl_error": 7.025846571195871e-09
+        },
+        "average_entry_exposure": 0.1281683651349569,
+        "run_id": "5f082f127142aa741a07",
+        "params": {
+          "entry_period": 20,
+          "exit_period": 10,
+          "atr_multiplier": 2.5,
+          "risk_per_trade": 0.005,
+          "long_only": true,
+          "adx_filter": false
+        },
+        "kind": "return_revision_confirmation",
+        "integrity": {
+          "checks": {
+            "no_overlapping_positions": true,
+            "leverage_at_most_2": true,
+            "effective_exposure_at_most_2": true,
+            "budgeted_risk_at_most_limit": true,
+            "atr_stop_installed_and_tightened": true,
+            "pnl_reconciled": true,
+            "funding_reconciled": true,
+            "fee_proxy_reconciled": true,
+            "funding_mark_join_complete": true
+          },
+          "passed": true,
+          "max_budgeted_risk_fraction": 0.004992228514018917,
+          "max_pnl_error_usdt": 4.9510902044858085e-09,
+          "max_funding_error_usdt": 3.552713678800501e-15
+        },
+        "source": "user_data/backtest_results/return_revision_20261028/5f082f127142aa741a07/backtest-result-2026-10-28_04-58-57.zip",
+        "mark_to_market": {
+          "max_drawdown": 0.033208329737953846,
+          "sharpe_daily": 1.7461822001881437,
+          "sortino_daily": 3.487868432088131,
+          "annualized_volatility": 0.03982921559583742,
+          "final_equity": 10713.750147739996,
+          "valuation": "hourly Mark Price open; native fills and exact funding events",
+          "selection_use": "Drawdown eligibility for this NEW experiment only; frozen original study unchanged"
+        },
+        "source_sha256": "0de867eebe94ab6ec2262acec27ac7b67da6b33afd8313f626fe6f170196d6de"
+      }
+    },
+    "continuous": {
+      "baseline": {
+        "strategy": "Donchian4HStrategy",
+        "period": "20230101-20250101",
+        "actual_start": "2023-01-01 00:00:00",
+        "actual_end": "2024-12-31 20:00:00",
+        "starting_balance": 10000,
+        "final_balance": 11145.674316699999,
+        "total_return": 0.11456743167,
+        "cagr": 0.05573075718669851,
+        "max_drawdown": 0.04759257387496714,
+        "sharpe": 0.9251822905463148,
+        "sortino": 1.9089297637164504,
+        "trade_sharpe": 0.26385132144761664,
+        "stats": {
+          "trades": 58,
+          "pnl_usdt": 1145.6743167,
+          "win_rate": 0.3448275862068966,
+          "average_win": 115.82809635350002,
+          "average_loss": -30.81283185184211,
+          "expectancy": 19.753005460344827,
+          "profit_factor": 1.9784665125442462,
+          "max_consecutive_losses": 9
+        },
+        "long": {
+          "trades": 49,
+          "pnl_usdt": 1331.7283955899998,
+          "win_rate": 0.3673469387755102,
+          "average_win": 124.44643383944445,
+          "average_loss": -29.30023914580645,
+          "expectancy": 27.178130522244892,
+          "profit_factor": 2.4661648421750737,
+          "max_consecutive_losses": 9
+        },
+        "short": {
+          "trades": 9,
+          "pnl_usdt": -186.05407889000003,
+          "win_rate": 0.2222222222222222,
+          "average_win": 38.26305898,
+          "average_loss": -37.511456692857145,
+          "expectancy": -20.672675432222224,
+          "profit_factor": 0.2914390303535184,
+          "max_consecutive_losses": 6
+        },
+        "yearly_realized": {
+          "2023": {
+            "trades": 27,
+            "pnl_usdt": 467.62408588999995,
+            "win_rate": 0.2962962962962963,
+            "average_win": 141.13309985875,
+            "average_loss": -34.81266910421052,
+            "expectancy": 17.319410588518515,
+            "profit_factor": 1.7069780808973876,
+            "max_consecutive_losses": 9
+          },
+          "2024": {
+            "trades": 31,
+            "pnl_usdt": 678.05023081,
+            "win_rate": 0.3870967741935484,
+            "average_win": 98.95809401666666,
+            "average_loss": -26.812994599473683,
+            "expectancy": 21.872588090645163,
+            "profit_factor": 2.330953695633027,
+            "max_consecutive_losses": 5
+          }
+        },
+        "costs": {
+          "engine_fees_including_proxy": 173.77891350000002,
+          "trading_fees": 86.88945675,
+          "slippage_proxy": 86.88945675,
+          "funding_cost_net": 102.50286982017576,
+          "funding_paid": 104.01844538603265,
+          "funding_received": 1.5155755658568761,
+          "pnl_error": 2.0175775716779754e-08
+        },
+        "average_entry_exposure": 0.14063888998265114,
+        "run_id": "61b1d14925a3185e80dc",
+        "params": {
+          "entry_period": 20,
+          "exit_period": 10,
+          "atr_multiplier": 2.5,
+          "risk_per_trade": 0.005,
+          "long_only": false,
+          "adx_filter": false
+        },
+        "kind": "return_revision_continuous",
+        "integrity": {
+          "checks": {
+            "no_overlapping_positions": true,
+            "leverage_at_most_2": true,
+            "effective_exposure_at_most_2": true,
+            "budgeted_risk_at_most_limit": true,
+            "atr_stop_installed_and_tightened": true,
+            "pnl_reconciled": true,
+            "funding_reconciled": true,
+            "fee_proxy_reconciled": true,
+            "funding_mark_join_complete": true
+          },
+          "passed": true,
+          "max_budgeted_risk_fraction": 0.0049975500207488956,
+          "max_pnl_error_usdt": 4.978382150966354e-09,
+          "max_funding_error_usdt": 8.881784197001252e-16
+        },
+        "source": "user_data/backtest_results/return_revision_20261028/61b1d14925a3185e80dc/backtest-result-2026-10-28_04-59-01.zip",
+        "mark_to_market": {
+          "max_drawdown": 0.05515158071892878,
+          "sharpe_daily": 1.2442126586066875,
+          "sortino_daily": 2.8179075888012766,
+          "annualized_volatility": 0.04431386248938657,
+          "final_equity": 11145.674316700004,
+          "valuation": "hourly Mark Price open; native fills and exact funding events",
+          "selection_use": "Drawdown eligibility for this NEW experiment only; frozen original study unchanged"
+        },
+        "source_sha256": "d8ce909a5a96b38428f1c483155d5895d3aa327cc6fc875bfc316c69f3656f4e"
+      },
+      "long_only": {
+        "strategy": "DonchianReturnStrategy",
+        "period": "20230101-20250101",
+        "actual_start": "2023-01-01 00:00:00",
+        "actual_end": "2024-12-31 20:00:00",
+        "starting_balance": 10000,
+        "final_balance": 11513.52993421,
+        "total_return": 0.15135299342099998,
+        "cagr": 0.07301118047343769,
+        "max_drawdown": 0.022756750234220222,
+        "sharpe": 1.1769848016601732,
+        "sortino": 2.4190605677245642,
+        "trade_sharpe": 0.32140895945419423,
+        "stats": {
+          "trades": 52,
+          "pnl_usdt": 1513.5299342099997,
+          "win_rate": 0.36538461538461536,
+          "average_win": 130.35853348473682,
+          "average_loss": -29.190369757575755,
+          "expectancy": 29.10634488865384,
+          "profit_factor": 2.5712217365456937,
+          "max_consecutive_losses": 5
+        },
+        "long": {
+          "trades": 52,
+          "pnl_usdt": 1513.5299342099997,
+          "win_rate": 0.36538461538461536,
+          "average_win": 130.35853348473682,
+          "average_loss": -29.190369757575755,
+          "expectancy": 29.10634488865384,
+          "profit_factor": 2.5712217365456937,
+          "max_consecutive_losses": 5
+        },
+        "short": {
+          "trades": 0,
+          "pnl_usdt": 0.0,
+          "win_rate": null,
+          "average_win": null,
+          "average_loss": null,
+          "expectancy": null,
+          "profit_factor": null,
+          "max_consecutive_losses": 0
+        },
+        "yearly_realized": {
+          "2023": {
+            "trades": 22,
+            "pnl_usdt": 739.8231111700002,
+            "win_rate": 0.3181818181818182,
+            "average_win": 177.57550008142854,
+            "average_loss": -33.547025960000006,
+            "expectancy": 33.62832323500001,
+            "profit_factor": 2.470220960972084,
+            "max_consecutive_losses": 5
+          },
+          "2024": {
+            "trades": 30,
+            "pnl_usdt": 773.70682304,
+            "win_rate": 0.4,
+            "average_win": 102.81530296999999,
+            "average_loss": -25.559822922222224,
+            "expectancy": 25.79022743466667,
+            "profit_factor": 2.6816905391680237,
+            "max_consecutive_losses": 5
+          }
+        },
+        "costs": {
+          "engine_fees_including_proxy": 162.0161259,
+          "trading_fees": 81.00806295,
+          "slippage_proxy": 81.00806295,
+          "funding_cost_net": 108.86483988022636,
+          "funding_paid": 108.94308856889995,
+          "funding_received": 0.07824868867358657,
+          "pnl_error": 9.773430065251887e-09
+        },
+        "average_entry_exposure": 0.14234125639212505,
+        "run_id": "31cb6715626175870fd6",
+        "params": {
+          "entry_period": 20,
+          "exit_period": 10,
+          "atr_multiplier": 2.5,
+          "risk_per_trade": 0.005,
+          "long_only": true,
+          "adx_filter": false
+        },
+        "kind": "return_revision_continuous",
+        "integrity": {
+          "checks": {
+            "no_overlapping_positions": true,
+            "leverage_at_most_2": true,
+            "effective_exposure_at_most_2": true,
+            "budgeted_risk_at_most_limit": true,
+            "atr_stop_installed_and_tightened": true,
+            "pnl_reconciled": true,
+            "funding_reconciled": true,
+            "fee_proxy_reconciled": true,
+            "funding_mark_join_complete": true
+          },
+          "passed": true,
+          "max_budgeted_risk_fraction": 0.004996320564103425,
+          "max_pnl_error_usdt": 4.950621246280207e-09,
+          "max_funding_error_usdt": 3.552713678800501e-15
+        },
+        "source": "user_data/backtest_results/return_revision_20261028/31cb6715626175870fd6/backtest-result-2026-10-28_04-59-05.zip",
+        "mark_to_market": {
+          "max_drawdown": 0.03331560190725724,
+          "sharpe_daily": 1.599284874041262,
+          "sortino_daily": 3.7766895305943162,
+          "annualized_volatility": 0.0446234723942613,
+          "final_equity": 11513.529934210002,
+          "valuation": "hourly Mark Price open; native fills and exact funding events",
+          "selection_use": "Drawdown eligibility for this NEW experiment only; frozen original study unchanged"
+        },
+        "source_sha256": "a088ac95acbb87120199a9962434cdc03ba4724a42fda3fb0059e4a0aa1d37c2"
+      }
+    }
+  },
+  "reason": "候選通過開發期比較與前視檢查，可供後續獨立模擬驗證。",
+  "identity": {
+    "protocol": "8e902bcf3d2963b869733810a44c40595436bce8fb9c08fa99eb1195cec2a18b",
+    "base_config": "9462d7964b3f7f7eef511c31da3e9135804b8183bf2721282fb67fc400e9fd94",
+    "strategy": "e7486557c67c7824989676f2e7293bfbce17404d9e3533a98469220d20e45892",
+    "reference": "643708df44e657f30becea956e025ef9a6651268f3153ee6778287fdba4e8f2d",
+    "environment": "b4d4153908569861dbb3dbe909ccdef08f743b21668b9d7558f62b0cfb332d5c",
+    "market_rules": "a60b2d7f100a35fcadf7c12a1d1bcfe386ab24037b48d16798c990182ca559f7",
+    "data": {
+      "4h": "607c5ced62624aeea3e54940d805012702299a24c246a25a376db363b11f5635",
+      "1d": "f4f49a8265de3e85cfaee00b7c9c61da83e6c665527aa3be051ef8b50953cb91",
+      "mark": "1957ce3540661b9a4c6d4d010410cc92e7224927cb2e78515137931622677f39",
+      "funding": "2db3e526d8af383bc8ee411e99149fba198a754b9d239b84019f8824ab4c67a3"
+    },
+    "return_revision": "e7521dbb7336cb35168c80d1234aebd9d8ea4eb4d31c145236c00a47f4ca07e8",
+    "return_protocol": "60f656d2ca0c49fd222bb1bf0d4f99987ee08ccd8bb79a50097e556e12158dcf",
+    "return_runner": "0f9e44147cf309887bb39a82fa7c0e3556bbbc93a79f422d112a3f6b3faa1c2c"
+  },
+  "deployment_changed": false,
+  "lookahead": {
+    "passed": true,
+    "native": {
+      "filename": "DonchianReturnStrategy.py",
+      "strategy": "DonchianReturnStrategy",
+      "has_bias": "False",
+      "total_signals": "20",
+      "biased_entry_signals": "0",
+      "biased_exit_signals": "0",
+      "biased_indicators": ""
+    },
+    "identity": {
+      "protocol": "8e902bcf3d2963b869733810a44c40595436bce8fb9c08fa99eb1195cec2a18b",
+      "base_config": "9462d7964b3f7f7eef511c31da3e9135804b8183bf2721282fb67fc400e9fd94",
+      "strategy": "e7486557c67c7824989676f2e7293bfbce17404d9e3533a98469220d20e45892",
+      "reference": "643708df44e657f30becea956e025ef9a6651268f3153ee6778287fdba4e8f2d",
+      "environment": "b4d4153908569861dbb3dbe909ccdef08f743b21668b9d7558f62b0cfb332d5c",
+      "market_rules": "a60b2d7f100a35fcadf7c12a1d1bcfe386ab24037b48d16798c990182ca559f7",
+      "data": {
+        "4h": "607c5ced62624aeea3e54940d805012702299a24c246a25a376db363b11f5635",
+        "1d": "f4f49a8265de3e85cfaee00b7c9c61da83e6c665527aa3be051ef8b50953cb91",
+        "mark": "1957ce3540661b9a4c6d4d010410cc92e7224927cb2e78515137931622677f39",
+        "funding": "2db3e526d8af383bc8ee411e99149fba198a754b9d239b84019f8824ab4c67a3"
+      },
+      "return_revision": "e7521dbb7336cb35168c80d1234aebd9d8ea4eb4d31c145236c00a47f4ca07e8",
+      "return_protocol": "60f656d2ca0c49fd222bb1bf0d4f99987ee08ccd8bb79a50097e556e12158dcf",
+      "return_runner": "0f9e44147cf309887bb39a82fa7c0e3556bbbc93a79f422d112a3f6b3faa1c2c"
+    },
+    "export": "user_data/backtest_results/return_revision_20261028/lookahead-20261028T045906545857.csv",
+    "sha256": "30ba10dfe6bd56f177532ddfb7e67747d14e45150fd6b8cc5567ca153f8f319a",
+    "note": "Native lookahead plus unit prefix-invariance checks; not proof of profitability"
+  },
+  "protected_artifacts_unchanged": true,
+  "result_identity": "{\"base_config\":\"9462d7964b3f7f7eef511c31da3e9135804b8183bf2721282fb67fc400e9fd94\",\"data\":{\"1d\":\"f4f49a8265de3e85cfaee00b7c9c61da83e6c665527aa3be051ef8b50953cb91\",\"4h\":\"607c5ced62624aeea3e54940d805012702299a24c246a25a376db363b11f5635\",\"funding\":\"2db3e526d8af383bc8ee411e99149fba198a754b9d239b84019f8824ab4c67a3\",\"mark\":\"1957ce3540661b9a4c6d4d010410cc92e7224927cb2e78515137931622677f39\"},\"environment\":\"b4d4153908569861dbb3dbe909ccdef08f743b21668b9d7558f62b0cfb332d5c\",\"market_rules\":\"a60b2d7f100a35fcadf7c12a1d1bcfe386ab24037b48d16798c990182ca559f7\",\"protocol\":\"8e902bcf3d2963b869733810a44c40595436bce8fb9c08fa99eb1195cec2a18b\",\"reference\":\"643708df44e657f30becea956e025ef9a6651268f3153ee6778287fdba4e8f2d\",\"return_protocol\":\"60f656d2ca0c49fd222bb1bf0d4f99987ee08ccd8bb79a50097e556e12158dcf\",\"return_revision\":\"e7521dbb7336cb35168c80d1234aebd9d8ea4eb4d31c145236c00a47f4ca07e8\",\"return_runner\":\"0f9e44147cf309887bb39a82fa7c0e3556bbbc93a79f422d112a3f6b3faa1c2c\",\"strategy\":\"e7486557c67c7824989676f2e7293bfbce17404d9e3533a98469220d20e45892\"}"
+}

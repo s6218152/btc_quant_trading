@@ -1,0 +1,17 @@
+{
+  "dates": [
+    "2019-09-24 00:00:00+00:00"
+  ],
+  "mismatched_cells": {
+    "open": 0,
+    "high": 0,
+    "low": 1,
+    "close": 1
+  },
+  "policy": "Exclude only the initial 2019 warmup prefix; do not repair vendor prices",
+  "source_sha256": {
+    "4h": "a296755eb57d41604dfcfea9bf9977de27a602f6dc925d21625cf48e2d777489",
+    "1d": "d40d162e2939e64a3034a699be07181417d8fd586119df8aec74460d4e8ed8be"
+  },
+  "hourly_probe": "Native REST probe of 2019-09-24 also disagrees across timeframes"
+}

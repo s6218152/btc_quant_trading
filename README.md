@@ -5,7 +5,10 @@
 根目錄既有 `main.py`、`backtest.py` 與 `strategies/` 是舊系統，沒有改寫或啟動。
 
 研究結果與限制見 [Phase 7–10 報告](user_data/research/study/REPORT.md)。
-2025 樣本外兩折串聯報酬約 **-0.27%**，目前不支持穩定獲利結論；2026 最終測試仍保留。
+2025 樣本外兩折串聯報酬約 **-0.27%**，目前不支持穩定獲利結論。
+原研究保留 2026；使用者於 2026-10-21 另行授權固定 V1 評估至當日，
+結果與資料差異見 [上市至今評估](user_data/research/inception_20261021/REPORT.md)。
+此後 2026 已被觀察，不能再稱為未見保留樣本；舊研究與選參紀錄不變。
 
 ## 環境與執行
 
@@ -199,6 +202,45 @@ Funding 檔名雖為 `1h`，此 BTC 歷史區間實際事件間隔為 8 小時�
 已增加原生 1H／15m 持倉事件、成本與漏檢情境，以及 2024 校準、先凍結部位再測
 2025 的事前波動預算比較。這不是新的獨立 OOS；實現波動與尾部風險仍可能不同。
 仍需連續 dry-run。原同 1x 買入持有比較只供描述，不作等風險績效排名。
+
+## 報酬率改善研究（2026-10-28）
+
+```bash
+python3 scripts/research.py return-study
+```
+
+`DonchianReturnStrategy` 繼承原策略的倉位、停損與模擬交易限制，新增
+`research.long_only`（只做多）及 `research.adx_filter`（4h ADX(14) ≥ 25）兩個開關。
+兩者預設關閉。固定四組對照，維持每筆 0.5% 預算風險及最高 2 倍槓桿。
+
+2023 年依扣成本後年化選擇，2024 年確認，再檢查 2023–2024 連續帳戶。
+每個階段要求至少 10 筆、淨年化為正且高於同期間基準；每小時時價最大回撤
+不得超過 10%，也不得比基準高逾 2 個百分點。確認失敗不改挑第二名。
+兩年都是已知開發資料；2025／2026 不參與本次選擇或調參，仍需後續新資料驗證。
+
+計畫、原始策略與分析程式雜湊、候選、選擇及結果保存在
+[`user_data/research/return_revision_20261028/REPORT.md`](user_data/research/return_revision_20261028/REPORT.md)。
+研究指令不會替換 PVE 服務或原本凍結策略。符合所有門檻且通過前視檢查後，
+才將候選標為研究驗收通過。完整成交、時價淨值及原生記錄保存在本機結果目錄。
+
+單檔測試可使用 `python3 scripts/research.py test --test-path tests/test_return_strategy.py`。
+
+本次選中只做多（`long_only: true`、`adx_filter: false`），並通過兩階段及連續比較。
+2023–2024 連續淨年化由 5.57% 提高至 7.30%，總報酬由 11.46% 提高至 15.14%，
+每小時時價最大回撤由 5.52% 降至 3.33%。這是開發期結果，尚未達年化 10%，
+也不代表未來或完整牛熊週期績效。PVE 目前仍執行原策略。
+
+固定候選從上市歷史延伸至台北 2026-10-27 的評估：
+
+```bash
+python3 scripts/research.py candidate-inception-download --allow-final-holdout
+python3 scripts/research.py candidate-inception --allow-final-holdout
+```
+
+這是使用者另行要求的完整期間描述性評估，會包含 2025／2026，但不改選參決策。
+舊資料保持不變，只在新目錄追加；日線暖機規則使正式交易自 2022-06-21 開始。
+資料截止為 UTC 2026-10-27 16:00（不含），最後原生 K 線時間戳為台北 10/27 20:00。
+結果見 [固定候選完整歷史報告](user_data/research/candidate_inception_20261027/REPORT.md)。
 
 ## 框架依據
 

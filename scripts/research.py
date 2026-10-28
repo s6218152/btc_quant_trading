@@ -125,14 +125,38 @@ def main() -> None:
             "dryrun-status",
             "dryrun-logs",
             "history",
+            "inception-download",
+            "inception",
+            "return-study",
+            "candidate-inception-download",
+            "candidate-inception",
         ],
     )
     parser.add_argument("--result", help="Repository-relative native result JSON or ZIP")
+    parser.add_argument("--allow-final-holdout", action="store_true")
+    parser.add_argument("--test-path", help="Run one focused test file inside the pinned image")
+    parser.add_argument("--profile", choices=["baseline", "long-only"])
     args = parser.parse_args()
+    if args.test_path and args.action != "test":
+        parser.error("--test-path is only valid with test")
+    if args.profile and args.action != "dryrun-start":
+        parser.error("--profile is only valid with dryrun-start")
+    if args.action in {"inception", "inception-download",
+                       "candidate-inception", "candidate-inception-download"}:
+        if not args.allow_final_holdout:
+            parser.error("This isolated evaluation requires --allow-final-holdout")
+        module = (
+            "candidate_inception" if args.action.startswith("candidate-") else "inception_backtest"
+        )
+        command = ["docker", "compose", "run", "--rm", "--no-deps", "--entrypoint", "python",
+                   "research", f"scripts/{module}.py",
+                   "download" if args.action.endswith("-download") else "run",
+                   "--allow-final-holdout"]
+        raise SystemExit(run_logged(command, args.action))
     if args.action.startswith("dryrun-"):
         from dryrun import main as dryrun_main
 
-        raise SystemExit(dryrun_main(args.action))
+        raise SystemExit(dryrun_main(args.action, args.profile or "baseline"))
     if args.action == "analyze" and not args.result:
         parser.error("analyze requires --result")
     config = json.loads((ROOT / CONFIG).read_text())
@@ -156,6 +180,7 @@ def main() -> None:
             cmd[cmd.index("--lookahead-analysis-exportfilename") + 1] = lookahead_file
     else:
         commands = {
+            "return-study": ["--entrypoint", "python", "research", "scripts/return_study.py"],
             "history": ["--entrypoint", "python", "research", "scripts/historical_backtest.py"],
             "test": ["--entrypoint", "python", "research", "-m", "pytest"],
             "lint": ["--entrypoint", "ruff", "research", "check", "."],
@@ -190,6 +215,8 @@ def main() -> None:
             ],
         }
         cmd = [*prefix, *commands[args.action]]
+        if args.action == "test" and args.test_path:
+            cmd += [args.test_path]
     if args.action in {"backtest", "lookahead", "study"}:
         audit = [*prefix, "--entrypoint", "python", "research", "scripts/audit_data.py"]
         if args.action == "study":
@@ -223,6 +250,7 @@ def main() -> None:
             "stress",
             "stress-download",
             "history",
+            "return-study",
         }
         else subprocess.run(cmd, cwd=ROOT).returncode
     )

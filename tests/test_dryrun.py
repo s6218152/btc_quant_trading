@@ -18,6 +18,52 @@ def test_baseline_is_credential_free(config):
     validate(config, {})
 
 
+def test_long_only_profile_matches_accepted_candidate():
+    config = json.loads(Path("user_data/config.paper-long-only.json").read_text())
+    accepted = json.loads(Path(
+        "user_data/research/return_revision_20261028/candidate_config.json"
+    ).read_text())
+    assert config == accepted
+    validate(config, {})
+
+
+@pytest.mark.parametrize("override", [
+    {"long_only": False}, {"long_only": 1}, {"adx_filter": True},
+    {"risk_per_trade": 0.01},
+])
+def test_unapproved_return_profile_rejected(config, override):
+    config["strategy"] = "DonchianReturnStrategy"
+    config["research"].update(long_only=True, adx_filter=False)
+    config["research"].update(override)
+    with pytest.raises(ValueError, match="approved long-only"):
+        validate(config, {})
+
+
+def test_unknown_paper_strategy_rejected(config):
+    config["strategy"] = "SomeOtherStrategy"
+    with pytest.raises(ValueError, match="approved Donchian"):
+        validate(config, {})
+
+
+def test_prepare_explicit_long_only_profile_and_records_both_sources(tmp_path, monkeypatch):
+    config = json.loads(Path("user_data/config.paper-long-only.json").read_text())
+    user = tmp_path / "user_data"
+    (user / "strategies").mkdir(parents=True)
+    (user / "config.paper-long-only.json").write_text(json.dumps(config))
+    for name in ("Donchian4HStrategy", "DonchianReturnStrategy"):
+        (user / f"strategies/{name}.py").write_text(f"# {name}\n")
+    monkeypatch.setattr(dryrun, "ROOT", tmp_path)
+    monkeypatch.setattr(dryrun, "RUNTIME", user / "dryrun")
+    monkeypatch.setattr(dryrun.os, "environ", {})
+    dryrun.prepare("long-only")
+    runtime = json.loads((user / "dryrun/config.json").read_text())
+    session = json.loads((user / "dryrun/sessions.jsonl").read_text())
+    assert runtime["strategy"] == "DonchianReturnStrategy"
+    assert runtime["research"]["long_only"] is True
+    assert session["strategy_sha256"] != session["base_strategy_sha256"]
+    assert session["profile"] == "long-only"
+
+
 @pytest.mark.parametrize("key", ["key", "secret", "password", "uid", "account_id"])
 def test_credentials_are_rejected(config, key):
     config["exchange"][key] = "not-a-real-credential"

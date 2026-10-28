@@ -1,0 +1,57 @@
+{
+  "files": {
+    "4h": {
+      "rows": 15538,
+      "start": "2019-09-25 00:00:00+00:00",
+      "end": "2026-10-27 12:00:00+00:00",
+      "expected_rows": 15538,
+      "missing": 0,
+      "duplicate_count": 0,
+      "errors": [],
+      "file": "user_data/data/candidate_inception_20261027/futures/BTC_USDT_USDT-4h-futures.feather",
+      "sha256": "44ffddf53492a91a946c98960c678a408b6c04cdcba2b73338a0c6b3eb3173bd",
+      "seed_unchanged": true
+    },
+    "1d": {
+      "rows": 2589,
+      "start": "2019-09-25 00:00:00+00:00",
+      "end": "2026-10-26 00:00:00+00:00",
+      "expected_rows": 2589,
+      "missing": 0,
+      "duplicate_count": 0,
+      "errors": [],
+      "file": "user_data/data/candidate_inception_20261027/futures/BTC_USDT_USDT-1d-futures.feather",
+      "sha256": "8f59d1c8e5d7cc946c77a37c87ddba64c4ad01e30acd62ceff3b1ac1ae336f98",
+      "seed_unchanged": true
+    },
+    "mark": {
+      "rows": 59800,
+      "start": "2020-01-01 00:00:00+00:00",
+      "end": "2026-10-27 15:00:00+00:00",
+      "expected_rows": 59800,
+      "missing": 0,
+      "duplicate_count": 0,
+      "errors": [],
+      "file": "user_data/data/candidate_inception_20261027/futures/BTC_USDT_USDT-1h-mark.feather",
+      "sha256": "945c0c7e515fac88a57209c63a963af62418e1a4112a4da5693389f0424cc5fd",
+      "seed_unchanged": true
+    },
+    "funding": {
+      "rows": 7475,
+      "start": "2020-01-01 00:00:00+00:00",
+      "end": "2026-10-27 08:00:00+00:00",
+      "expected_rows": 7475,
+      "missing": 0,
+      "duplicate_count": 0,
+      "errors": [],
+      "file": "user_data/data/candidate_inception_20261027/futures/BTC_USDT_USDT-1h-funding_rate.feather",
+      "sha256": "7bb91e85f9fdcca6d5fc4bf1ac0ba3e347b8acf9260a65dd97d9cd9faf9a2e81",
+      "seed_unchanged": true
+    }
+  },
+  "errors": [],
+  "end_exclusive": "2026-10-27T16:00:00+00:00",
+  "inherited_quality_warning": "2019-09-24 discrepancy; seed begins 2019-09-25",
+  "evaluation_start": "2022-06-21T00:00:00+00:00",
+  "status": "PASS"
+}

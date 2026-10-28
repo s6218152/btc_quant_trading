@@ -1,0 +1,24 @@
+{
+  "status": "PASS",
+  "native_backtests": 8,
+  "checks": {
+    "all_accounting_and_risk_checks_passed": true,
+    "no_2025_or_2026_evaluation": true,
+    "fixed_risk_0_005": true,
+    "original_frozen_artifacts_unchanged": true,
+    "native_no_lookahead_detected": true,
+    "native_result_checksums_match": true
+  },
+  "pytest": {
+    "command": "python3 scripts/research.py test",
+    "passed": 115
+  },
+  "ruff": {
+    "command": "python3 scripts/research.py lint",
+    "status": "PASS"
+  },
+  "protocol_sha256": "60f656d2ca0c49fd222bb1bf0d4f99987ee08ccd8bb79a50097e556e12158dcf",
+  "summary_sha256": "761c80d673597e099acb67b0eea3405aab7d3bc782317972465bd63a054fbddd",
+  "candidate_config_sha256": "d8ca2bc9828efada2226ef22484b51f1b8b2a61c38d22e8d872aab17ad6ad0b7",
+  "scope": "Known development only; no production deployment and no future return guarantee"
+}

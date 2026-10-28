@@ -24,16 +24,25 @@ def validate(config: dict, environ: dict) -> None:
         raise ValueError("Exchange credentials are forbidden")
     if config.get("add_config_files"):
         raise ValueError("Additional configuration files are forbidden")
-    if config.get("strategy") != "Donchian4HStrategy":
-        raise ValueError("Only the baseline Donchian strategy is permitted")
+    strategy = config.get("strategy")
+    if strategy not in {"Donchian4HStrategy", "DonchianReturnStrategy"}:
+        raise ValueError("Only approved Donchian paper strategies are permitted")
+    if strategy == "DonchianReturnStrategy":
+        params = config.get("research", {})
+        if (params.get("long_only") is not True or params.get("adx_filter") is not False
+                or params.get("risk_per_trade") != 0.005):
+            raise ValueError("Return strategy requires the approved long-only 0.5% risk profile")
     if exchange.get("name") != "binance" or exchange.get("pair_whitelist") != ["BTC/USDT:USDT"]:
         raise ValueError("Only Binance BTC perpetual paper trading is permitted")
     if config.get("api_server", {}).get("enabled") or config.get("telegram", {}).get("enabled"):
         raise ValueError("Remote control is disabled")
 
 
-def prepare() -> None:
-    config = json.loads((ROOT / "user_data/config.json").read_text())
+def prepare(profile: str = "baseline") -> None:
+    sources = {"baseline": "config.json", "long-only": "config.paper-long-only.json"}
+    if profile not in sources:
+        raise ValueError("Unknown paper profile")
+    config = json.loads((ROOT / "user_data" / sources[profile]).read_text())
     validate(config, os.environ)
     config.update(
         initial_state="running",
@@ -53,6 +62,11 @@ def prepare() -> None:
         "purpose": "prospective operational paper trading; not holdout evaluation",
         "config_sha256": hashlib.sha256(payload.encode()).hexdigest(),
         "strategy_sha256": hashlib.sha256(
+            (ROOT / f"user_data/strategies/{config['strategy']}.py").read_bytes()
+        ).hexdigest(),
+        "profile": profile,
+        "strategy": config["strategy"],
+        "base_strategy_sha256": hashlib.sha256(
             (ROOT / "user_data/strategies/Donchian4HStrategy.py").read_bytes()
         ).hexdigest(),
     }
@@ -78,12 +92,11 @@ def healthy(log: Path, now: datetime | None = None) -> bool:
     return False
 
 
-def main(action: str) -> int:
+def main(action: str, profile: str = "baseline") -> int:
     if action == "dryrun-start":
-        validate(json.loads((ROOT / "user_data/config.json").read_text()), os.environ)
         # The runtime guard also checks the effective config inside the container.
-        prepare()
-        return subprocess.run([*COMPOSE, "up", "-d"], cwd=ROOT).returncode
+        prepare(profile)
+        return subprocess.run([*COMPOSE, "up", "-d", "--force-recreate"], cwd=ROOT).returncode
     if action == "dryrun-stop":
         return subprocess.run([*COMPOSE, "stop", "-t", "120"], cwd=ROOT).returncode
     if action == "dryrun-status":

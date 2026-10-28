@@ -79,3 +79,24 @@ Docker 程序退出後會依 `unless-stopped` 重啟；手動停止、主機斷�
 更新後必須重新建立容器，讓單檔掛載取得新版程式，再確認心跳及 Telegram 通知。
 官方依據：[Freqtrade webhook](https://github.com/freqtrade/freqtrade/blob/2026.9/docs/webhook-config.md)、
 [Telegram sendMessage](https://core.telegram.org/bots/api#sendmessage)。
+
+## 只做多版本更新（2026-10-28）
+
+研究與原策略設定保持凍結。新增 `user_data/config.paper-long-only.json` 作為正式
+模擬服務設定：`DonchianReturnStrategy`、只做多、ADX 過濾關閉、每筆 0.5% 風險。
+
+停止舊容器並備份 VM 和 runtime 後，先確認沒有未平倉，再將舊 runtime 設定
+移到備份目錄，保留 `trades.sqlite` 及其 WAL／SHM、Telegram 設定與既有成交紀錄。
+checkout 完整測試過的提交，重新建置映像，執行：
+
+```sh
+python3 scripts/research.py dryrun-start --profile long-only
+python3 scripts/research.py dryrun-status
+```
+
+啟動會重建容器以更新檔案掛載。新交易使用新策略名稱，原有已平倉交易仍保留
+原策略名稱，模擬資金延續既有帳戶；不將策略切換解讀為全新的績效紀錄。
+若仍有未平倉，必須先保留原版管理倉位，不可直接讓另一策略接管。
+
+回復時先停新容器，再回復已備份 runtime 與原提交並重建容器；不要覆蓋備份。
+Telegram 憑證只留在 VM runtime 與受保護備份中，不送 GitHub 或部署輸出。

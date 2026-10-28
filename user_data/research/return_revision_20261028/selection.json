@@ -1,0 +1,10 @@
+{
+  "selected": "long_only",
+  "protocol_sha256": "60f656d2ca0c49fd222bb1bf0d4f99987ee08ccd8bb79a50097e556e12158dcf",
+  "selection_runs": {
+    "baseline": "c097f3bdb01c7e812c7c",
+    "long_only": "d301c61b50a54b89011b",
+    "adx_only": "7c0ba5e99e8c22898599",
+    "long_adx": "d462831ae4d35d119332"
+  }
+}

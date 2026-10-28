@@ -1,0 +1,32 @@
+{
+  "passed": true,
+  "native": {
+    "filename": "DonchianReturnStrategy.py",
+    "strategy": "DonchianReturnStrategy",
+    "has_bias": "False",
+    "total_signals": "20",
+    "biased_entry_signals": "0",
+    "biased_exit_signals": "0",
+    "biased_indicators": ""
+  },
+  "identity": {
+    "protocol": "8e902bcf3d2963b869733810a44c40595436bce8fb9c08fa99eb1195cec2a18b",
+    "base_config": "9462d7964b3f7f7eef511c31da3e9135804b8183bf2721282fb67fc400e9fd94",
+    "strategy": "e7486557c67c7824989676f2e7293bfbce17404d9e3533a98469220d20e45892",
+    "reference": "643708df44e657f30becea956e025ef9a6651268f3153ee6778287fdba4e8f2d",
+    "environment": "b4d4153908569861dbb3dbe909ccdef08f743b21668b9d7558f62b0cfb332d5c",
+    "market_rules": "a60b2d7f100a35fcadf7c12a1d1bcfe386ab24037b48d16798c990182ca559f7",
+    "data": {
+      "4h": "607c5ced62624aeea3e54940d805012702299a24c246a25a376db363b11f5635",
+      "1d": "f4f49a8265de3e85cfaee00b7c9c61da83e6c665527aa3be051ef8b50953cb91",
+      "mark": "1957ce3540661b9a4c6d4d010410cc92e7224927cb2e78515137931622677f39",
+      "funding": "2db3e526d8af383bc8ee411e99149fba198a754b9d239b84019f8824ab4c67a3"
+    },
+    "return_revision": "e7521dbb7336cb35168c80d1234aebd9d8ea4eb4d31c145236c00a47f4ca07e8",
+    "return_protocol": "60f656d2ca0c49fd222bb1bf0d4f99987ee08ccd8bb79a50097e556e12158dcf",
+    "return_runner": "0f9e44147cf309887bb39a82fa7c0e3556bbbc93a79f422d112a3f6b3faa1c2c"
+  },
+  "export": "user_data/backtest_results/return_revision_20261028/lookahead-20261028T045906545857.csv",
+  "sha256": "30ba10dfe6bd56f177532ddfb7e67747d14e45150fd6b8cc5567ca153f8f319a",
+  "note": "Native lookahead plus unit prefix-invariance checks; not proof of profitability"
+}
