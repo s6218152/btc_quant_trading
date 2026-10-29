@@ -2,7 +2,8 @@
 
 以 Freqtrade 2026.9 研究 BTC/USDT:USDT 永續合約。已完成開發基準與凍結的 Walk-Forward 研究，
 **僅允許回測與無交易金鑰的 dry-run，禁止真實下單。持續模擬驗證尚未完成。**
-根目錄既有 `main.py`、`backtest.py` 與 `strategies/` 是舊系統，沒有改寫或啟動。
+依使用者 2026-10-29 指示移除未使用的舊 CCXT 多策略系統；模擬服務只提供 BTC 只做多版。
+原 Donchian 基底、買入持有對照與執行壓力測試仍是既有研究／核帳的必要依賴，保留不變。
 
 研究結果與限制見 [Phase 7–10 報告](user_data/research/study/REPORT.md)。
 2025 樣本外兩折串聯報酬約 **-0.27%**，目前不支持穩定獲利結論。
@@ -70,8 +71,10 @@ python3 scripts/research.py dryrun-logs
 python3 scripts/research.py dryrun-stop
 ```
 
-`dryrun-start` 在背景啟動，重複呼叫不會建立第二個服務。使用原本 V1 基準策略、
-10,000 USDT 模擬資金，最多一個 BTC 永續部位；不是根據 2025 結果重新選參。
+`dryrun-start` 預設使用唯一可用的 `long-only` 設定，在背景重建同一個服務，
+不會建立第二個服務。採用 2023／2024 開發期選出的 BTC 只做多版，ADX 關閉、
+每筆風險 0.5%，最多一個 BTC 永續部位；不是根據 2025 結果重新選參。
+新帳戶起始模擬資金為 10,000 USDT，既有帳戶延續原有成交與資金。
 只連公開行情，不需提供 API key。入口拒絕交易金鑰、實盤模式、額外設定檔與
 `FREQTRADE__*` 環境覆寫，不開放 API／網頁管理連接埠。
 
@@ -191,7 +194,8 @@ Funding 檔名雖為 `1h`，此 BTC 歷史區間實際事件間隔為 8 小時�
 
 ## 產物
 
-- `user_data/strategies/Donchian4HStrategy.py`：策略與風控。
+- `user_data/strategies/DonchianReturnStrategy.py`：唯一可供模擬服務使用的只做多策略。
+- `user_data/strategies/Donchian4HStrategy.py`：只做多版繼承的風控與凍結研究基底。
 - `user_data/config.json`：無憑證、僅供研究的設定。
 - `user_data/research/`：計畫、資料稽核、環境鎖定、lookahead 與精簡績效摘要。
 - `user_data/backtest_results/`：原生 ZIP 與逐筆 CSV，不送入 Codex 上下文。

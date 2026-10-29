@@ -11,11 +11,17 @@ from scripts.dryrun import healthy, validate
 
 @pytest.fixture
 def config():
-    return json.loads(Path("user_data/config.json").read_text())
+    return json.loads(Path("user_data/config.paper-long-only.json").read_text())
 
 
-def test_baseline_is_credential_free(config):
+def test_selected_profile_is_credential_free(config):
     validate(config, {})
+
+
+def test_research_baseline_is_not_available_to_paper_service():
+    baseline = json.loads(Path("user_data/config.json").read_text())
+    with pytest.raises(ValueError, match="Only approved Donchian long-only"):
+        validate(baseline, {})
 
 
 def test_long_only_profile_matches_accepted_candidate():
@@ -55,13 +61,20 @@ def test_prepare_explicit_long_only_profile_and_records_both_sources(tmp_path, m
     monkeypatch.setattr(dryrun, "ROOT", tmp_path)
     monkeypatch.setattr(dryrun, "RUNTIME", user / "dryrun")
     monkeypatch.setattr(dryrun.os, "environ", {})
-    dryrun.prepare("long-only")
+    dryrun.prepare()
     runtime = json.loads((user / "dryrun/config.json").read_text())
     session = json.loads((user / "dryrun/sessions.jsonl").read_text())
     assert runtime["strategy"] == "DonchianReturnStrategy"
     assert runtime["research"]["long_only"] is True
     assert session["strategy_sha256"] != session["base_strategy_sha256"]
     assert session["profile"] == "long-only"
+
+
+def test_removed_profile_is_rejected_before_creating_runtime(tmp_path, monkeypatch):
+    monkeypatch.setattr(dryrun, "ROOT", tmp_path)
+    with pytest.raises(ValueError, match="Only the long-only"):
+        dryrun.prepare("baseline")
+    assert not (tmp_path / "user_data").exists()
 
 
 @pytest.mark.parametrize("key", ["key", "secret", "password", "uid", "account_id"])
@@ -104,8 +117,9 @@ def test_health_requires_recent_running_heartbeat(tmp_path):
 def test_prepare_isolates_runtime_and_refuses_changed_config(tmp_path, monkeypatch, config):
     user = tmp_path / "user_data"
     (user / "strategies").mkdir(parents=True)
-    (user / "config.json").write_text(json.dumps(config))
+    (user / "config.paper-long-only.json").write_text(json.dumps(config))
     (user / "strategies/Donchian4HStrategy.py").write_text("# frozen strategy\n")
+    (user / "strategies/DonchianReturnStrategy.py").write_text("# selected strategy\n")
     monkeypatch.setattr(dryrun, "ROOT", tmp_path)
     monkeypatch.setattr(dryrun, "RUNTIME", user / "dryrun")
     monkeypatch.setattr(dryrun.os, "environ", {})
@@ -114,7 +128,7 @@ def test_prepare_isolates_runtime_and_refuses_changed_config(tmp_path, monkeypat
     assert runtime["dry_run"] is True
     assert runtime["initial_state"] == "running"
     assert runtime["db_url"].endswith("/user_data/dryrun/trades.sqlite")
-    assert json.loads((user / "config.json").read_text()) == config
+    assert json.loads((user / "config.paper-long-only.json").read_text()) == config
     runtime["dry_run"] = False
     (user / "dryrun/config.json").write_text(json.dumps(runtime))
     with pytest.raises(ValueError, match="differs"):

@@ -25,24 +25,22 @@ def validate(config: dict, environ: dict) -> None:
     if config.get("add_config_files"):
         raise ValueError("Additional configuration files are forbidden")
     strategy = config.get("strategy")
-    if strategy not in {"Donchian4HStrategy", "DonchianReturnStrategy"}:
-        raise ValueError("Only approved Donchian paper strategies are permitted")
-    if strategy == "DonchianReturnStrategy":
-        params = config.get("research", {})
-        if (params.get("long_only") is not True or params.get("adx_filter") is not False
-                or params.get("risk_per_trade") != 0.005):
-            raise ValueError("Return strategy requires the approved long-only 0.5% risk profile")
+    if strategy != "DonchianReturnStrategy":
+        raise ValueError("Only approved Donchian long-only paper strategy is permitted")
+    params = config.get("research", {})
+    if (params.get("long_only") is not True or params.get("adx_filter") is not False
+            or params.get("risk_per_trade") != 0.005):
+        raise ValueError("Return strategy requires the approved long-only 0.5% risk profile")
     if exchange.get("name") != "binance" or exchange.get("pair_whitelist") != ["BTC/USDT:USDT"]:
         raise ValueError("Only Binance BTC perpetual paper trading is permitted")
     if config.get("api_server", {}).get("enabled") or config.get("telegram", {}).get("enabled"):
         raise ValueError("Remote control is disabled")
 
 
-def prepare(profile: str = "baseline") -> None:
-    sources = {"baseline": "config.json", "long-only": "config.paper-long-only.json"}
-    if profile not in sources:
-        raise ValueError("Unknown paper profile")
-    config = json.loads((ROOT / "user_data" / sources[profile]).read_text())
+def prepare(profile: str = "long-only") -> None:
+    if profile != "long-only":
+        raise ValueError("Only the long-only paper profile is permitted")
+    config = json.loads((ROOT / "user_data/config.paper-long-only.json").read_text())
     validate(config, os.environ)
     config.update(
         initial_state="running",
@@ -92,7 +90,7 @@ def healthy(log: Path, now: datetime | None = None) -> bool:
     return False
 
 
-def main(action: str, profile: str = "baseline") -> int:
+def main(action: str, profile: str = "long-only") -> int:
     if action == "dryrun-start":
         # The runtime guard also checks the effective config inside the container.
         prepare(profile)

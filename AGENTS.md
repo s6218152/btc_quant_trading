@@ -1,8 +1,11 @@
 # BTCUSDT Donchian research
 
 - Research BTC/USDT:USDT 4h / 1d with Freqtrade, Pandas, NumPy, Pytest and Ruff.
-- Backtesting / dry-run only. Never enable live orders, load legacy API keys,
-  or run the legacy `main.py`. Keep legacy code intact.
+- Backtesting / dry-run only. Never enable live orders or load legacy API keys.
+- The user authorized removing the unused legacy system on 2026-10-29.
+  Keep only the selected BTC long-only strategy available to the paper service.
+  Preserve its inherited base code, frozen research references, data and evidence;
+  these dependencies are not unused alternative trading systems.
 - Use the pinned Docker environment through `python3 scripts/research.py`.
   Use Freqtrade's exchange, downloader, engine and order management.
 - Prefer RTK-supported shell output, targeted `rg` and small source ranges.

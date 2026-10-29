@@ -137,7 +137,7 @@ def main() -> None:
     parser.add_argument("--result", help="Repository-relative native result JSON or ZIP")
     parser.add_argument("--allow-final-holdout", action="store_true")
     parser.add_argument("--test-path", help="Run one focused test file inside the pinned image")
-    parser.add_argument("--profile", choices=["baseline", "long-only"])
+    parser.add_argument("--profile", choices=["long-only"])
     args = parser.parse_args()
     if args.test_path and args.action != "test":
         parser.error("--test-path is only valid with test")
@@ -161,7 +161,7 @@ def main() -> None:
     if args.action.startswith("dryrun-"):
         from dryrun import main as dryrun_main
 
-        raise SystemExit(dryrun_main(args.action, args.profile or "baseline"))
+        raise SystemExit(dryrun_main(args.action, args.profile or "long-only"))
     if args.action == "analyze" and not args.result:
         parser.error("analyze requires --result")
     config = json.loads((ROOT / CONFIG).read_text())
